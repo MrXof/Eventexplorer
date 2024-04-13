@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category {
+enum Category: Equatable {
   
   case allActivities
   case education

@@ -30,12 +30,22 @@ class CollectionViewCell: UICollectionViewCell {
       imageLabel.text = cellModel.image
       imageView.isHidden = false
     }
+    
+    collectionViewCell.layer.borderColor = UIColor(red: 0.233, green: 0.233, blue: 0.233, alpha: 0.2).cgColor
+    collectionViewCell.layer.borderWidth = 1
+    collectionView.layer.cornerRadius = 17
+    
     if isSelected {
       leftImageViewCell.backgroundColor = UIColor.black
       rightViewCell.backgroundColor = UIColor.black
       labelCategories.textColor = UIColor.white
       labelCategories.font = UIFont(name: "RedHatDisplay-Bold", size: 12)
+      collectionViewCell.layer.borderColor = UIColor.black.cgColor
+      collectionViewCell.layer.borderWidth = 1
+      collectionView.layer.cornerRadius = 17
+      
     } else {
+        
       leftImageViewCell.backgroundColor = UIColor.white
       rightViewCell.backgroundColor = UIColor.white
       labelCategories.textColor = UIColor.black

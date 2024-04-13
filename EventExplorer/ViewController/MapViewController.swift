@@ -12,15 +12,16 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   @IBOutlet weak var locationButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var mapView: UIView!
+  @IBOutlet weak var blurMapView: UIVisualEffectView!
   
   var currentFilter = ObjectStore.shared.arrayCategories[0]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    creaeteBlur()
     createShadowView()
     createCornerRadius()
+    collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
         layout.scrollDirection = .horizontal
     }
@@ -32,6 +33,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   func createCornerRadius() {
     mapView.layer.cornerRadius = 21
     mapView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
+    blurMapView.layer.cornerRadius = 21
+    blurMapView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
+    blurMapView.clipsToBounds = true
   }
   
   func createShadowView(
@@ -48,20 +52,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     mapView.layer.shadowOffset = CGSize(width: x, height: y)
     mapView.layer.shadowRadius = blur
     mapView.layer.shadowRadius += spread
-  }
-  
-  func creaeteBlur() {
-    let blurEffect = UIBlurEffect(style: .light)
-    let blurView = UIVisualEffectView(effect: blurEffect)
-    
-    let containerBlur = UIView(frame: mapView.bounds)
-    containerBlur.layer.cornerRadius = 21
-    containerBlur.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
-    containerBlur.clipsToBounds = true
-        
-    containerBlur.addSubview(blurView)
-    mapView.addSubview(containerBlur)
-    mapView.sendSubviewToBack(containerBlur)
   }
   
   func configureLocationButton() {
@@ -91,7 +81,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     let filterIndex = ObjectStore.shared.arrayCategories.firstIndex(of: currentFilter)
     guard let guardIndex = filterIndex else { return }
     
-    var resultIndex = IndexPath(item: guardIndex, section: 0)
+    let resultIndex = IndexPath(item: guardIndex, section: 0)
     indexToReload.append(resultIndex)
     indexToReload.append(indexPath)
     currentFilter = ObjectStore.shared.arrayCategories[indexPath.row]
