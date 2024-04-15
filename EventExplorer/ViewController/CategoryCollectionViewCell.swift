@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CollectionViewCellCategory: UICollectionViewCell {
+class CategoryCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var collectionView: UIView!
   @IBOutlet weak var labelCategories: UILabel!
