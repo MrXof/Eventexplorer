@@ -30,6 +30,8 @@
 		E4A09C822BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C742BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf */; };
 		E4A09C832BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */; };
 		E4A09C842BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */; };
+		E4E14A742BCD35D70080FF64 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A732BCD35D70080FF64 /* Model.swift */; };
+		E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A752BCD35F30080FF64 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		E4A09C742BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
+		E4E14A732BCD35D70080FF64 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E4E14A752BCD35F30080FF64 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 		E402EED72BC53AD300095E9C /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E4E14A732BCD35D70080FF64 /* Model.swift */,
+				E4E14A752BCD35F30080FF64 /* NetworkManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -243,9 +249,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E14A742BCD35D70080FF64 /* Model.swift in Sources */,
 				E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */,
 				E402EEC82BC53A1C00095E9C /* MapViewController.swift in Sources */,
 				E402EEC42BC53A1C00095E9C /* AppDelegate.swift in Sources */,
+				E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */,
 				E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */,
 				E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */,
 				E402EEC62BC53A1C00095E9C /* SceneDelegate.swift in Sources */,

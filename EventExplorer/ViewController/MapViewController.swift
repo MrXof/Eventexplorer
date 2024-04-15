@@ -19,6 +19,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    fetch()
     createShadowView()
     createCornerRadius()
     collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
@@ -88,5 +89,17 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     collectionView.reloadItems(at: indexesToReload)
   }
   
+  // MARK: - API
+  
+  func fetch() {
+    NetworkManager.shared.fetchData { response in
+      switch response {
+      case .success(let PinTable):
+        print(PinTable)
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
 }
 
