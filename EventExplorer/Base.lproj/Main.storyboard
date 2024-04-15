@@ -117,7 +117,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="rFd-Rt-qpO" customClass="CollectionViewCell" customModule="EventExplorer" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCellCategory" id="rFd-Rt-qpO" customClass="CollectionViewCellCategory" customModule="EventExplorer" customModuleProvider="target">
                                                         <rect key="frame" x="96" y="0.0" width="201" height="34"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7wb-dV-dgi">
@@ -265,10 +265,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="blurMapView" destination="cQ1-f0-ges" id="DC4-NQ-pvA"/>
+                        <outlet property="blurHeaderView" destination="cQ1-f0-ges" id="UfG-lj-JWo"/>
                         <outlet property="collectionView" destination="lNp-ih-P2u" id="O8p-8z-laR"/>
+                        <outlet property="headerView" destination="ZqI-Xb-PDM" id="gMp-Gv-mHb"/>
                         <outlet property="locationButton" destination="ahu-0J-O0Z" id="Pbu-ud-ghE"/>
-                        <outlet property="mapView" destination="ZqI-Xb-PDM" id="GnT-Rs-2DB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

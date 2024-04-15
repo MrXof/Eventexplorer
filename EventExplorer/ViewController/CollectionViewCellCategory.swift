@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CollectionViewCellCategory: UICollectionViewCell {
   
   @IBOutlet weak var collectionView: UIView!
   @IBOutlet weak var labelCategories: UILabel!
@@ -20,10 +20,9 @@ class CollectionViewCell: UICollectionViewCell {
   
   func display(_ сategories: Category, _ isSelected: Bool) {
     
-    let settingsCell = сategories.name
     labelCategories.text = сategories.name
-    switch settingsCell {
-    case Category.allActivities.name:
+    switch сategories {
+    case Category.allActivities:
       imageView.isHidden = true
     default:
       imageLabel.text = сategories.image

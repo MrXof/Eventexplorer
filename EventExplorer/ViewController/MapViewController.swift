@@ -11,8 +11,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
 
   @IBOutlet weak var locationButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
-  @IBOutlet weak var mapView: UIView!
-  @IBOutlet weak var blurMapView: UIVisualEffectView!
+  @IBOutlet weak var headerView: UIView!
+  @IBOutlet weak var blurHeaderView: UIVisualEffectView!
   
   var currentFilter = ObjectStore.shared.arrayCategories[0]
   
@@ -31,11 +31,11 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   }
   
   func createCornerRadius() {
-    mapView.layer.cornerRadius = 21
-    mapView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
-    blurMapView.layer.cornerRadius = 21
-    blurMapView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
-    blurMapView.clipsToBounds = true
+    headerView.layer.cornerRadius = 21
+    headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
+    blurHeaderView.layer.cornerRadius = 21
+    blurHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
+    blurHeaderView.clipsToBounds = true
   }
   
   func createShadowView(
@@ -47,11 +47,11 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     spread: CGFloat = -12
   )
   {
-    mapView.layer.shadowColor = color.cgColor
-    mapView.layer.shadowOpacity = alpha
-    mapView.layer.shadowOffset = CGSize(width: x, height: y)
-    mapView.layer.shadowRadius = blur
-    mapView.layer.shadowRadius += spread
+    headerView.layer.shadowColor = color.cgColor
+    headerView.layer.shadowOpacity = alpha
+    headerView.layer.shadowOffset = CGSize(width: x, height: y)
+    headerView.layer.shadowRadius = blur
+    headerView.layer.shadowRadius += spread
   }
   
   func configureLocationButton() {
@@ -71,21 +71,21 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCellCategory", for: indexPath) as! CollectionViewCellCategory
     cell.display(ObjectStore.shared.arrayCategories[indexPath.row], currentFilter == ObjectStore.shared.arrayCategories[indexPath.row])
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    var indexToReload: [IndexPath] = []
+    var indexesToReload: [IndexPath] = []
     let filterIndex = ObjectStore.shared.arrayCategories.firstIndex(of: currentFilter)
     guard let guardIndex = filterIndex else { return }
     
     let resultIndex = IndexPath(item: guardIndex, section: 0)
-    indexToReload.append(resultIndex)
-    indexToReload.append(indexPath)
+    indexesToReload.append(resultIndex)
+    indexesToReload.append(indexPath)
     currentFilter = ObjectStore.shared.arrayCategories[indexPath.row]
-    collectionView.reloadItems(at: indexToReload)
+    collectionView.reloadItems(at: indexesToReload)
   }
   
 }
