@@ -14,8 +14,8 @@
 		E402EED02BC53A1E00095E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E402EECE2BC53A1E00095E9C /* LaunchScreen.storyboard */; };
 		E402EEE02BC5511B00095E9C /* RedHatDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */; };
 		E402EEE22BC5629E00095E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E402EEE12BC5629E00095E9C /* Assets.xcassets */; };
-		E402EEE42BC5757C00095E9C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E402EEE32BC5757C00095E9C /* CollectionViewCell.swift */; };
-		E4A09C652BC67B4100FB08F8 /* Enum Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A09C642BC67B4100FB08F8 /* Enum Model.swift */; };
+		E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */; };
+		E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A09C642BC67B4100FB08F8 /* Category.swift */; };
 		E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */; };
 		E4A09C772BC6A30700FB08F8 /* RedHatDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C692BC6A30600FB08F8 /* RedHatDisplay-Light.ttf */; };
 		E4A09C782BC6A30700FB08F8 /* RedHatDisplay-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C6A2BC6A30600FB08F8 /* RedHatDisplay-BoldItalic.ttf */; };
@@ -42,8 +42,8 @@
 		E402EED12BC53A1E00095E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Black.ttf"; sourceTree = "<group>"; };
 		E402EEE12BC5629E00095E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E402EEE32BC5757C00095E9C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		E4A09C642BC67B4100FB08F8 /* Enum Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum Model.swift"; sourceTree = "<group>"; };
+		E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		E4A09C642BC67B4100FB08F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		E4A09C692BC6A30600FB08F8 /* RedHatDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Light.ttf"; sourceTree = "<group>"; };
 		E4A09C6A2BC6A30600FB08F8 /* RedHatDisplay-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				E402EEC72BC53A1C00095E9C /* MapViewController.swift */,
-				E402EEE32BC5757C00095E9C /* CollectionViewCell.swift */,
+				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -124,7 +124,7 @@
 		E402EED92BC53AE700095E9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4A09C642BC67B4100FB08F8 /* Enum Model.swift */,
+				E4A09C642BC67B4100FB08F8 /* Category.swift */,
 				E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */,
 			);
 			path = Model;
@@ -243,10 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4A09C652BC67B4100FB08F8 /* Enum Model.swift in Sources */,
+				E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */,
 				E402EEC82BC53A1C00095E9C /* MapViewController.swift in Sources */,
 				E402EEC42BC53A1C00095E9C /* AppDelegate.swift in Sources */,
-				E402EEE42BC5757C00095E9C /* CollectionViewCell.swift in Sources */,
+				E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */,
 				E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */,
 				E402EEC62BC53A1C00095E9C /* SceneDelegate.swift in Sources */,
 			);

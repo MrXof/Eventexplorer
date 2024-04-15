@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CategoryCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var collectionView: UIView!
   @IBOutlet weak var labelCategories: UILabel!
@@ -18,16 +18,14 @@ class CollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var leftImageViewCell: UIView!
   @IBOutlet weak var rightViewCell: UIView!
   
-  func display(_ cellModel: Category, _ isSelected: Bool) {
+  func display(_ сategories: Category, _ isSelected: Bool) {
     
-    let cells = cellModel.name
-    switch cells {
-    case "All activities" :
-      labelCategories.text = cellModel.name
+    labelCategories.text = сategories.name
+    switch сategories {
+    case Category.allActivities:
       imageView.isHidden = true
     default:
-      labelCategories.text = cellModel.name
-      imageLabel.text = cellModel.image
+      imageLabel.text = сategories.image
       imageView.isHidden = false
     }
     
@@ -40,12 +38,7 @@ class CollectionViewCell: UICollectionViewCell {
       rightViewCell.backgroundColor = UIColor.black
       labelCategories.textColor = UIColor.white
       labelCategories.font = UIFont(name: "RedHatDisplay-Bold", size: 12)
-      collectionViewCell.layer.borderColor = UIColor.black.cgColor
-      collectionViewCell.layer.borderWidth = 1
-      collectionView.layer.cornerRadius = 17
-      
     } else {
-        
       leftImageViewCell.backgroundColor = UIColor.white
       rightViewCell.backgroundColor = UIColor.white
       labelCategories.textColor = UIColor.black
