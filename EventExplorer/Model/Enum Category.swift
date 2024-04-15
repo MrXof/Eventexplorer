@@ -1,5 +1,5 @@
 //
-//  model.swift
+//  Category.swift
 //  EventExplorer
 //
 //  Created by Даниил Чугуевский on 10.04.2024.
