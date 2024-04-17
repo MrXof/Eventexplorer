@@ -20,12 +20,12 @@ struct Position: Decodable {
 
 // MARK: - Place
 struct Place: Decodable {
-  let priceTier, date, address, location, name: String
+  let priceTier, date, address, name: String
   let icon, category: String
   let latitudeLocation , longitudeLocation: Double
   let usersGoing: Int
   let friendAvatars: [FriendAvatar]?
-  var friendsAreGoing: Bool
+  let friendsAreGoing: Bool
   
   enum CodingKeys: String, CodingKey {
     case priceTier = "price_tier"
@@ -50,7 +50,7 @@ struct FriendAvatar: Decodable {
 extension Place {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    location = try container.decode(String.self, forKey: .location)
+    let location = try container.decode(String.self, forKey: .location)
     priceTier = try container.decode(String.self, forKey: .priceTier)
     date = try container.decode(String.self, forKey: .date)
     address = try container.decode(String.self, forKey: .address)
@@ -60,11 +60,7 @@ extension Place {
     usersGoing = try container.decode(Int.self, forKey: .usersGoing)
     friendAvatars = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)
     
-    if let areGoing = try? container.decode(Bool.self, forKey: .friendsAreGoing) {
-      friendsAreGoing = areGoing
-    } else {
-      friendsAreGoing = false
-    }
+    friendsAreGoing = (try? container.decode(Bool.self, forKey: .friendsAreGoing)) ?? false
     
     let locationArray = location.components(separatedBy: ", ")
     latitudeLocation = Double(locationArray[0])!
