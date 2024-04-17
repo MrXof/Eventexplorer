@@ -33,7 +33,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,6 +269,7 @@
                         <outlet property="collectionView" destination="lNp-ih-P2u" id="O8p-8z-laR"/>
                         <outlet property="headerView" destination="ZqI-Xb-PDM" id="gMp-Gv-mHb"/>
                         <outlet property="locationButton" destination="ahu-0J-O0Z" id="Pbu-ud-ghE"/>
+                        <outlet property="mapView" destination="647-jH-Yil" id="WWB-Yp-a6d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
