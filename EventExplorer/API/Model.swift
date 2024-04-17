@@ -25,7 +25,7 @@ struct Place: Decodable {
   let latitudeLocation , longitudeLocation: Double
   let usersGoing: Int
   let friendAvatars: [FriendAvatar]?
-  var friendsAreGoing: Bool?
+  var friendsAreGoing: Bool
   
   enum CodingKeys: String, CodingKey {
     case priceTier = "price_tier"
@@ -59,9 +59,11 @@ extension Place {
     category = try container.decode(String.self, forKey: .category)
     usersGoing = try container.decode(Int.self, forKey: .usersGoing)
     friendAvatars = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)
-  
-    if !container.contains(.friendsAreGoing) {
-        friendsAreGoing = false
+    
+    if let areGoing = try? container.decode(Bool.self, forKey: .friendsAreGoing) {
+      friendsAreGoing = areGoing
+    } else {
+      friendsAreGoing = false
     }
     
     let locationArray = location.components(separatedBy: ", ")
