@@ -20,7 +20,7 @@ final class NetworkManager {
   
   let url = URL(string: "https://api.airtable.com/v0/appbkJ66NrzqsAF8p/pins?maxRecords=3&view=Grid%20view")!
   
-  func PinTableData(completion: @escaping (Result<PinTable, Error>) -> Void) {
+  func getPinTableData(completion: @escaping (Result<PinTable, Error>) -> Void) {
     var URLRequest = URLRequest(url: url)
     URLRequest.setValue("Bearer patrin0ge3TdKJSyO.4ab6bff6c550d0c69e4a88879811c62c095c5dba213340029ebca579008e03bc", forHTTPHeaderField: "Authorization")
     URLSession.shared.dataTask(with: URLRequest) { data, response , error in

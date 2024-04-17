@@ -9,7 +9,9 @@ import Foundation
 
 // MARK: - PinTable
 struct PinTable: Decodable {
+  
   let records: [Position]
+  
 }
 
 // MARK: - Record
@@ -17,6 +19,7 @@ struct Position: Decodable {
   
   let id, createdTime: String
   let fields: Place
+  
 }
 
 // MARK: - Place
@@ -25,7 +28,7 @@ struct Place: Decodable {
   let date, address, name: String
   let priceTier: PriceTier
   let icon, category: String
-  let latitudeLocation , longitudeLocation: Double
+  let latitudeLocation, longitudeLocation: Double
   let usersGoing: Int
   let friendsAreGoing: Bool
   let friendAvatar: FriendAvatar?
@@ -37,6 +40,7 @@ struct Place: Decodable {
     case usersGoing = "users_going"
     case friendAvatars = "friend_avatars"
     case friendsAreGoing = "friends_are_going"
+    
   }
   
 }
@@ -50,6 +54,7 @@ struct FriendAvatar: Decodable {
   let filename: String
   let size: Int
   let type: String
+  
 }
 
 enum PriceTier: String, Decodable {
@@ -58,6 +63,7 @@ enum PriceTier: String, Decodable {
   case tenPlus = "10_plus"
   case twentyPlus = "20_plus"
   case fiftyPlus = "50_plus"
+  
 }
 
 extension Place {
@@ -80,12 +86,5 @@ extension Place {
     latitudeLocation = Double(locationArray[0])!
     longitudeLocation = Double(locationArray[1])!
   }
+  
 }
-
-                                   
-                                   
-
-
-
-
-

@@ -108,7 +108,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   // MARK: - API
   
   func getPinTableData() {
-    NetworkManager.shared.PinTableData { response in
+    NetworkManager.shared.getPinTableData { response in
       switch response {
       case .success(let pinTable):
         print(pinTable)
@@ -121,6 +121,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
 }
 
 extension MapViewController: CLLocationManagerDelegate {
+  
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.first else { return }
     
