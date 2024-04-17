@@ -14,20 +14,24 @@ struct PinTable: Decodable {
 
 // MARK: - Record
 struct Position: Decodable {
+  
   let id, createdTime: String
   let fields: Place
 }
 
 // MARK: - Place
 struct Place: Decodable {
-  let priceTier, date, address, name: String
+  
+  let date, address, name: String
+  let priceTier: PriceTier
   let icon, category: String
   let latitudeLocation , longitudeLocation: Double
   let usersGoing: Int
-  let friendAvatars: [FriendAvatar]?
   let friendsAreGoing: Bool
+  let friendAvatar: FriendAvatar?
   
   enum CodingKeys: String, CodingKey {
+    
     case priceTier = "price_tier"
     case date, address, name, location, icon, category
     case usersGoing = "users_going"
@@ -39,6 +43,7 @@ struct Place: Decodable {
 
 // MARK: - FriendAvatar
 struct FriendAvatar: Decodable {
+  
   let id: String
   let width, height: Int
   let url: String
@@ -47,18 +52,27 @@ struct FriendAvatar: Decodable {
   let type: String
 }
 
+enum PriceTier: String, Decodable {
+  
+  case below = "below_10"
+  case tenPlus = "10_plus"
+  case twentyPlus = "20_plus"
+  case fiftyPlus = "50_plus"
+}
+
 extension Place {
+  
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let location = try container.decode(String.self, forKey: .location)
-    priceTier = try container.decode(String.self, forKey: .priceTier)
     date = try container.decode(String.self, forKey: .date)
     address = try container.decode(String.self, forKey: .address)
     name = try container.decode(String.self, forKey: .name)
     icon = try container.decode(String.self, forKey: .icon)
     category = try container.decode(String.self, forKey: .category)
     usersGoing = try container.decode(Int.self, forKey: .usersGoing)
-    friendAvatars = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)
+    friendAvatar = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)?.first ??  nil
+    priceTier = try container.decode(PriceTier.self, forKey: .priceTier)
     
     friendsAreGoing = (try? container.decode(Bool.self, forKey: .friendsAreGoing)) ?? false
     

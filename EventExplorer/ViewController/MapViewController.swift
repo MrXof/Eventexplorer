@@ -25,8 +25,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     locationManager = CLLocationManager()
     locationManager.delegate = self
-    
-    fetch()
+    getPinTableData()
     createShadowView()
     createCornerRadius()
     collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
@@ -35,7 +34,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     configureLocationButton()
     collectionView.dataSource = self
-    
+    collectionView.delegate = self
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -108,11 +107,11 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   
   // MARK: - API
   
-  func fetch() {
-    NetworkManager.shared.fetchData { response in
+  func getPinTableData() {
+    NetworkManager.shared.PinTableData { response in
       switch response {
-      case .success(let PinTable):
-        print(PinTable)
+      case .success(let pinTable):
+        print(pinTable)
       case .failure(let error):
         print(error)
       }
