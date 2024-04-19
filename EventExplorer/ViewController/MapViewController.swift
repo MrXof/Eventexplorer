@@ -9,8 +9,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MKMapViewDelegate {
+  
   @IBOutlet weak var locationButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var headerView: UIView!
@@ -18,13 +18,19 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   @IBOutlet weak var mapView: MKMapView!
   
   var currentFilter = ObjectStore.shared.arrayCategories[0]
-  var locationManager: CLLocationManager!
+  let locationManager = CLLocationManager()
+  var pinTableArray = [AirtableRecord<Pin>]()
+  var annotation = MKPointAnnotation()
+  var coordinate = CLLocationCoordinate2D()
+  var friendAvatarArray = [FriendAvatar]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    locationManager = CLLocationManager()
+    mapView.delegate = self
     locationManager.delegate = self
+    locationManager.startUpdatingLocation()
+    self.locationManager.requestWhenInUseAuthorization()
     getPinTableData()
     createShadowView()
     createCornerRadius()
@@ -35,14 +41,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     configureLocationButton()
     collectionView.dataSource = self
     collectionView.delegate = self
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-      self.locationManager.requestWhenInUseAuthorization()
-    }
   }
   
   func createCornerRadius() {
@@ -111,35 +109,71 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     NetworkManager.shared.getPinTableData { response in
       switch response {
       case .success(let pinTable):
-        print(pinTable)
+        DispatchQueue.main.async {
+          self.pinTableArray.append(contentsOf: pinTable.records)
+          self.updateMapData()
+        }
       case .failure(let error):
         print(error)
       }
     }
   }
+
+  func updateMapData() {
+    for record in pinTableArray {
+      coordinate = CLLocationCoordinate2D(latitude: record.fields.latitudeLocation , longitude: record.fields.longitudeLocation)
+      print(record.fields)
+      
+      if let friendAvatar = record.fields.friendAvatar {
+        friendAvatarArray.append(friendAvatar)
+      }
+      print(friendAvatarArray)
+    }
     
+    annotation.coordinate = coordinate
+    annotation.title = "Test Point"
+    mapView.addAnnotation(annotation)
+    
+  }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    guard !(annotation is MKUserLocation) else { return nil }
+    
+    let identifier = "CustomAnnotation"
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+    
+    if annotationView == nil {
+      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+      annotationView?.canShowCallout = true
+//      if let customAnnotation = annotation as? FriendAvatar {
+//        let width = customAnnotation.width
+//        let height = customAnnotation.height
+//        annotationView?.frame = CGRect(x: 0, y: 0, width: width, height: height)
+//      }
+      
+    } else {
+      annotationView?.annotation = annotation
+    }
+    
+    annotationView?.image = UIImage(named: "testPoint")
+    return annotationView
+  }
+  
 }
 
 extension MapViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let location = locations.first else { return }
-    
-    let latitude = location.coordinate.latitude
-    let longitude = location.coordinate.longitude
-    
-    print("Latitude: \(latitude), Longitude: \(longitude)")
+
+    let latitude = 48.467707
+    let longitude = 35.050814
     
     let initialLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     
-    let regionRadius: CLLocationDistance = 1000
+    let regionRadius: CLLocationDistance = 2000
     let coordinateRegion = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
     mapView.setRegion(coordinateRegion, animated: true)
     
-    let annotation = MKPointAnnotation()
-    annotation.coordinate = initialLocation
-    annotation.title = "Мое текущее местоположение"
-    mapView.addAnnotation(annotation)
   }
   
 }

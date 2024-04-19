@@ -7,23 +7,24 @@
 
 import Foundation
 
-// MARK: - PinTable
-struct PinTable: Decodable {
+// MARK: - AirtableResponse
+struct AirtableResponse<T: Decodable>: Decodable {
   
-  let records: [Position]
+  let records: [AirtableRecord<T>]
+  // AirtableResponse<Pin>
   
 }
 
-// MARK: - Record
-struct Position: Decodable {
+// MARK: - AirtableRecord
+struct AirtableRecord<T: Decodable>: Decodable {
   
   let id, createdTime: String
-  let fields: Place
+  let fields: T
   
 }
 
-// MARK: - Place
-struct Place: Decodable {
+// MARK: - Pin
+struct Pin {
   
   let date, address, name: String
   let priceTier: PriceTier
@@ -66,7 +67,7 @@ enum PriceTier: String, Decodable {
   
 }
 
-extension Place {
+extension Pin: Decodable {
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
