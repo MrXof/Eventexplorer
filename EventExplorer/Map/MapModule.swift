@@ -17,6 +17,7 @@ class MapModule {
       case .success(let pinTable):
         DispatchQueue.main.async {
           self.pinTableArray.append(contentsOf: pinTable.records)
+          
         }
       case .failure(let error):
         print(error)

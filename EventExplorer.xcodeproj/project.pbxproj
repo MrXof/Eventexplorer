@@ -31,6 +31,7 @@
 		E4A09C832BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */; };
 		E4A09C842BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */; };
 		E4D62FD12BD6E54B003B12B7 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */; };
+		E4DBE1DD2BD7BBC700F25CAE /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */; };
 		E4E14A742BCD35D70080FF64 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A732BCD35D70080FF64 /* Model.swift */; };
 		E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A752BCD35F30080FF64 /* NetworkManager.swift */; };
 		E4E1DF022BD6651F00E8B38A /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */; };
@@ -65,6 +66,7 @@
 		E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
 		E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		E4E14A732BCD35D70080FF64 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E4E14A752BCD35F30080FF64 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
-				E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */,
+				E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -164,6 +166,15 @@
 				E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */ = {
+			isa = PBXGroup;
+			children = (
+				E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */,
+				E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */,
+			);
+			path = "Custom Annotation View";
 			sourceTree = "<group>";
 		};
 		E4E1DF002BD664B300E8B38A /* Views */ = {
@@ -301,6 +312,7 @@
 				E4D62FD12BD6E54B003B12B7 /* CustomAnnotation.swift in Sources */,
 				E4E1DF062BD686A100E8B38A /* MapModule.swift in Sources */,
 				E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */,
+				E4DBE1DD2BD7BBC700F25CAE /* AnnotationView.swift in Sources */,
 				E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */,
 				E402EEC62BC53A1C00095E9C /* SceneDelegate.swift in Sources */,
 			);

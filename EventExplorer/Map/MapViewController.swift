@@ -29,9 +29,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    addPoints()
     module.$pinTableArray.sink { array in
-      self.updateMapData(with: array)
+      print(array)
+      self.addPoints(pointsArray: array)
     }.store(in: &cancellables)
     
     mapView.delegate = self
@@ -109,45 +109,31 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     collectionView.reloadItems(at: indexesToReload)
   }
   
-
-  func updateMapData(with array: [AirtableRecord<Pin>]) {
-    for record in array {
-      coordinate = CLLocationCoordinate2D(latitude: record.fields.latitudeLocation , longitude: record.fields.longitudeLocation)
-    }
-    
-    annotation.coordinate = coordinate
-    annotation.title = "Test Point"
-    mapView.addAnnotation(annotation)
-    
-  }
-  
-  func addPoints() {
+  func addPoints(pointsArray: [AirtableRecord<Pin>]) {
     
     let oldAnnotation = self.mapView.annotations
     mapView.removeAnnotations(oldAnnotation)
     
-    let points = generatePoints(module.pinTableArray.count)
+    let points = generatePoints(arrayPoints: pointsArray)
     mapView.addAnnotations(points)
     
   }
   
-  func generatePoints(_ pointsCount: Int) -> [CustomAnnotation] {
+  func generatePoints(arrayPoints: [AirtableRecord<Pin>]) -> [CustomAnnotation] {
     
     var points: [CustomAnnotation] = []
     
-    guard !module.pinTableArray.isEmpty else {
+    guard !arrayPoints.isEmpty else {
       return points
     }
     
-    for _ in 0..<pointsCount {
-
-      for record in module.pinTableArray {
-        let latitude = record.fields.latitudeLocation
-        let longtitude = record.fields.latitudeLocation
-        let annotation = CustomAnnotation(latitude: latitude, lontitude: longtitude)
-        points.append(annotation)
-      }
+    for record in arrayPoints {
+      let latitude = record.fields.latitudeLocation
+      let longtitude = record.fields.longitudeLocation
+      let annotation = CustomAnnotation(latitude: latitude, lontitude: longtitude, title: "", image: record.fields.friendAvatar?.url)
+      points.append(annotation)
     }
+    
     return points
   }
   
@@ -176,18 +162,22 @@ extension MapViewController: MKMapViewDelegate {
     guard !(annotation is MKUserLocation) else { return nil }
     
     let identifier = "CustomAnnotation"
-    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+    var annotationView: MKAnnotationView?
     
-    if annotationView == nil {
-      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-      annotationView?.canShowCallout = true
-      
+    if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
+      annotationView = dequeuedView
     } else {
-      annotationView?.annotation = annotation
+      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+      annotationView?.frame = CGRect(x: 0, y: 0, width: 14.67, height: 12.06)
+      let customAnnotationView = AnnotationView(frame: annotationView!.bounds)
+      annotationView?.addSubview(customAnnotationView)
+      
     }
     
-    annotationView?.image = UIImage()
     return annotationView
   }
   
 }
+
+
+

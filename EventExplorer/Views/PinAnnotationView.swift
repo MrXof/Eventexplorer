@@ -11,8 +11,5 @@ import MapKit
 
 class PinAnnotationView: MKAnnotationView {
   
-  @IBOutlet weak var rectangleView: UIView!
-  @IBOutlet weak var triangleView: UIView!
-  
 }
 

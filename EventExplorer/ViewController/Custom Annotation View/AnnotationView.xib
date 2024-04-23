@@ -10,34 +10,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PinAnnotationView" customModule="EventExplorer" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="333" height="271"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnnotationView" customModule="EventExplorer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="76"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6MF-0K-c02">
-                    <rect key="frame" x="130" y="79" width="64" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MF-0K-c02">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="eXT-h5-ZBd"/>
+                        <constraint firstAttribute="height" constant="64" id="gZE-LX-z0w"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
                             <integer key="value" value="32"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VH1-mX-KPM">
-                    <rect key="frame" x="155" y="146" width="14.666666666666666" height="12"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBrownColor"/>
+            <constraints>
+                <constraint firstItem="6MF-0K-c02" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="DSw-U5-Mhw"/>
+                <constraint firstItem="6MF-0K-c02" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ejn-rZ-B6G"/>
+                <constraint firstItem="6MF-0K-c02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qB3-MD-0QP"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="rectangleView" destination="6MF-0K-c02" id="4F4-OK-TOx"/>
-                <outlet property="triangleView" destination="VH1-mX-KPM" id="OKa-5h-rOq"/>
-            </connections>
-            <point key="canvasLocation" x="-77.099236641221367" y="180.63380281690141"/>
+            <point key="canvasLocation" x="-282.44274809160305" y="109.1549295774648"/>
         </view>
         <view contentMode="scaleToFill" id="mjp-xJ-f0a">
             <rect key="frame" x="0.0" y="0.0" width="489" height="408"/>
