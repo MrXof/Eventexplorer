@@ -39,7 +39,7 @@ struct Pin {
     case priceTier = "price_tier"
     case date, address, name, location, icon, category
     case usersGoing = "users_going"
-    case friendAvatars = "friend_avatars"
+    case friendAvatars = "friend_avatar"
     case friendsAreGoing = "friends_are_going"
     
   }

@@ -30,8 +30,12 @@
 		E4A09C822BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C742BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf */; };
 		E4A09C832BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */; };
 		E4A09C842BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */; };
+		E4D62FD12BD6E54B003B12B7 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */; };
 		E4E14A742BCD35D70080FF64 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A732BCD35D70080FF64 /* Model.swift */; };
 		E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A752BCD35F30080FF64 /* NetworkManager.swift */; };
+		E4E1DF022BD6651F00E8B38A /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */; };
+		E4E1DF042BD665BA00E8B38A /* AnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */; };
+		E4E1DF062BD686A100E8B38A /* MapModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E1DF052BD686A100E8B38A /* MapModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,8 +64,12 @@
 		E4A09C742BC6A30700FB08F8 /* RedHatDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		E4A09C752BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		E4A09C762BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
+		E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		E4E14A732BCD35D70080FF64 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E4E14A752BCD35F30080FF64 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
+		E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnotationView.xib; sourceTree = "<group>"; };
+		E4E1DF052BD686A100E8B38A /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +102,11 @@
 		E402EEC22BC53A1C00095E9C /* EventExplorer */ = {
 			isa = PBXGroup;
 			children = (
+				E4E1DF072BD686F400E8B38A /* Map */,
+				E4E1DF002BD664B300E8B38A /* Views */,
 				E402EED72BC53AD300095E9C /* API */,
 				E402EED92BC53AE700095E9C /* Model */,
 				E402EED82BC53ADC00095E9C /* ViewController */,
-				E402EEDA2BC53B0A00095E9C /* Controller */,
 				E402EEC32BC53A1C00095E9C /* AppDelegate.swift */,
 				E402EEC52BC53A1C00095E9C /* SceneDelegate.swift */,
 				E402EEC92BC53A1C00095E9C /* Main.storyboard */,
@@ -121,8 +130,8 @@
 		E402EED82BC53ADC00095E9C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E402EEC72BC53A1C00095E9C /* MapViewController.swift */,
 				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
+				E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -134,13 +143,6 @@
 				E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E402EEDA2BC53B0A00095E9C /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		E4A09C682BC6A2E000FB08F8 /* Font */ = {
@@ -162,6 +164,24 @@
 				E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		E4E1DF002BD664B300E8B38A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */,
+				E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E4E1DF072BD686F400E8B38A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E402EEC72BC53A1C00095E9C /* MapViewController.swift */,
+				E4E1DF052BD686A100E8B38A /* MapModule.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +250,7 @@
 				E4A09C832BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf in Resources */,
 				E4A09C7A2BC6A30700FB08F8 /* RedHatDisplay-ExtraBoldItalic.ttf in Resources */,
 				E4A09C772BC6A30700FB08F8 /* RedHatDisplay-Light.ttf in Resources */,
+				E4E1DF042BD665BA00E8B38A /* AnnotationView.xib in Resources */,
 				E4A09C7E2BC6A30700FB08F8 /* RedHatDisplay-Italic.ttf in Resources */,
 				E4A09C812BC6A30700FB08F8 /* RedHatDisplay-Regular.ttf in Resources */,
 				E4A09C7B2BC6A30700FB08F8 /* RedHatDisplay-SemiBold.ttf in Resources */,
@@ -271,11 +292,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4E1DF022BD6651F00E8B38A /* PinAnnotationView.swift in Sources */,
 				E4E14A742BCD35D70080FF64 /* Model.swift in Sources */,
 				E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */,
 				E402EEC82BC53A1C00095E9C /* MapViewController.swift in Sources */,
 				E402EEC42BC53A1C00095E9C /* AppDelegate.swift in Sources */,
 				E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */,
+				E4D62FD12BD6E54B003B12B7 /* CustomAnnotation.swift in Sources */,
+				E4E1DF062BD686A100E8B38A /* MapModule.swift in Sources */,
 				E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */,
 				E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */,
 				E402EEC62BC53A1C00095E9C /* SceneDelegate.swift in Sources */,
