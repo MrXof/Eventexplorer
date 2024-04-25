@@ -18,7 +18,7 @@ final class NetworkManager {
   static let shared = NetworkManager()
   private init() {}
   
-  let url = URL(string: "https://api.airtable.com/v0/appbkJ66NrzqsAF8p/pins?maxRecords=13&view=Grid%20view")!
+  let url = URL(string: "https://api.airtable.com/v0/appbkJ66NrzqsAF8p/pins?&view=Grid%20view")!
   
   func getPinTableData(completion: @escaping (Result<AirtableResponse<Pin>, Error>) -> Void) {
     var URLRequest = URLRequest(url: url)

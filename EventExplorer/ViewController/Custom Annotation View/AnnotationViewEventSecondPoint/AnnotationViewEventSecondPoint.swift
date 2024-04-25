@@ -12,9 +12,9 @@ import SDWebImage
 
 class AnnotationViewEventSecondPoint: MKAnnotationView {
   
-  @IBOutlet weak var triangleView: UIView!
-  @IBOutlet weak var labelIcon: UILabel!
-  @IBOutlet weak var labelUsersGoing: UILabel!
+  @IBOutlet private weak var triangleView: UIView!
+  @IBOutlet private weak var labelIcon: UILabel!
+  @IBOutlet private weak var labelUsersGoing: UILabel!
   
   private var rectangleView: UIView!
   let imageView = UIImageView()
@@ -41,7 +41,7 @@ class AnnotationViewEventSecondPoint: MKAnnotationView {
 
   }
   
-  func drawTriangle(at origin: CGPoint, with size: CGSize) {
+  private func drawTriangle(at origin: CGPoint, with size: CGSize) {
       let trianglePath = UIBezierPath()
       trianglePath.move(to: CGPoint(x: origin.x + size.width / 2, y: origin.y + size.height))
       trianglePath.addLine(to: CGPoint(x: origin.x, y: origin.y))
@@ -56,7 +56,7 @@ class AnnotationViewEventSecondPoint: MKAnnotationView {
   }
   
   func display(_ annotation: MKAnnotation) {
-    guard let customAnnotation = annotation as? CustomAnnotation,
+    guard let customAnnotation = annotation as? CreateCustomAnnotation,
           let friendsIcon = customAnnotation.icon else { return }
     
     labelUsersGoing.text = "\(customAnnotation.usersGoing)"

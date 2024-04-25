@@ -11,7 +11,7 @@ class MapModule {
   
   @Published var pinTableArray = [AirtableRecord<Pin>]()
   
-  func getPinTableData() {
+  private func getPinTableData() {
     NetworkManager.shared.getPinTableData { response in
       switch response {
       case .success(let pinTable):

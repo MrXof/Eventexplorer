@@ -56,7 +56,7 @@ class AnnotationView: MKAnnotationView {
   }
   
   func display(_ annotation: MKAnnotation) {
-    guard let customAnnotation = annotation as? CustomAnnotation,
+    guard let customAnnotation = annotation as? CreateCustomAnnotation,
           let friendsIcon = customAnnotation.icon,
           let urlString = customAnnotation.image,
           let friendAvatarURL = URL(string: urlString) else { return }
