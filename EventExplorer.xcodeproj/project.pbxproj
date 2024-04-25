@@ -15,6 +15,11 @@
 		E402EEE02BC5511B00095E9C /* RedHatDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */; };
 		E402EEE22BC5629E00095E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E402EEE12BC5629E00095E9C /* Assets.xcassets */; };
 		E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */; };
+		E442B9372BD90C3B00E68C69 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E442B9362BD90C3B00E68C69 /* SDWebImage */; };
+		E442B9392BD90C3B00E68C69 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E442B9382BD90C3B00E68C69 /* SDWebImageMapKit */; };
+		E442B93D2BD929CA00E68C69 /* AnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E442B93C2BD929CA00E68C69 /* AnnotationView.xib */; };
+		E442B9412BD95B4600E68C69 /* AnnotationViewEventSecondPoint.xib in Resources */ = {isa = PBXBuildFile; fileRef = E442B9402BD95B4600E68C69 /* AnnotationViewEventSecondPoint.xib */; };
+		E442B9432BD9611400E68C69 /* AnnotationViewEventSecondPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442B9422BD9611400E68C69 /* AnnotationViewEventSecondPoint.swift */; };
 		E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A09C642BC67B4100FB08F8 /* Category.swift */; };
 		E4A09C672BC67EC600FB08F8 /* ObjectStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */; };
 		E4A09C772BC6A30700FB08F8 /* RedHatDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4A09C692BC6A30600FB08F8 /* RedHatDisplay-Light.ttf */; };
@@ -34,8 +39,6 @@
 		E4DBE1DD2BD7BBC700F25CAE /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */; };
 		E4E14A742BCD35D70080FF64 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A732BCD35D70080FF64 /* Model.swift */; };
 		E4E14A762BCD35F30080FF64 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E14A752BCD35F30080FF64 /* NetworkManager.swift */; };
-		E4E1DF022BD6651F00E8B38A /* PinAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */; };
-		E4E1DF042BD665BA00E8B38A /* AnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */; };
 		E4E1DF062BD686A100E8B38A /* MapModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E1DF052BD686A100E8B38A /* MapModule.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		E402EEDF2BC5511B00095E9C /* RedHatDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Black.ttf"; sourceTree = "<group>"; };
 		E402EEE12BC5629E00095E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		E442B93C2BD929CA00E68C69 /* AnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnnotationView.xib; sourceTree = "<group>"; };
+		E442B9402BD95B4600E68C69 /* AnnotationViewEventSecondPoint.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnotationViewEventSecondPoint.xib; sourceTree = "<group>"; };
+		E442B9422BD9611400E68C69 /* AnnotationViewEventSecondPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewEventSecondPoint.swift; sourceTree = "<group>"; };
 		E4A09C642BC67B4100FB08F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStore.swift; sourceTree = "<group>"; };
 		E4A09C692BC6A30600FB08F8 /* RedHatDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RedHatDisplay-Light.ttf"; sourceTree = "<group>"; };
@@ -69,8 +75,6 @@
 		E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		E4E14A732BCD35D70080FF64 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E4E14A752BCD35F30080FF64 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
-		E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnotationView.xib; sourceTree = "<group>"; };
 		E4E1DF052BD686A100E8B38A /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E442B9392BD90C3B00E68C69 /* SDWebImageMapKit in Frameworks */,
+				E442B9372BD90C3B00E68C69 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +153,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E442B9442BD9612600E68C69 /* AnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */,
+				E442B93C2BD929CA00E68C69 /* AnnotationView.xib */,
+			);
+			path = AnnotationView;
+			sourceTree = "<group>";
+		};
+		E442B9452BD9613B00E68C69 /* AnnotationViewEventSecondPoint */ = {
+			isa = PBXGroup;
+			children = (
+				E442B9402BD95B4600E68C69 /* AnnotationViewEventSecondPoint.xib */,
+				E442B9422BD9611400E68C69 /* AnnotationViewEventSecondPoint.swift */,
+			);
+			path = AnnotationViewEventSecondPoint;
+			sourceTree = "<group>";
+		};
 		E4A09C682BC6A2E000FB08F8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,8 +195,8 @@
 		E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */ = {
 			isa = PBXGroup;
 			children = (
-				E4E1DF032BD665BA00E8B38A /* AnnotationView.xib */,
-				E4DBE1DC2BD7BBC700F25CAE /* AnnotationView.swift */,
+				E442B9442BD9612600E68C69 /* AnnotationView */,
+				E442B9452BD9613B00E68C69 /* AnnotationViewEventSecondPoint */,
 			);
 			path = "Custom Annotation View";
 			sourceTree = "<group>";
@@ -180,7 +204,6 @@
 		E4E1DF002BD664B300E8B38A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E4E1DF012BD6651F00E8B38A /* PinAnnotationView.swift */,
 				E4D62FD02BD6E54B003B12B7 /* CustomAnnotation.swift */,
 			);
 			path = Views;
@@ -212,6 +235,10 @@
 			dependencies = (
 			);
 			name = EventExplorer;
+			packageProductDependencies = (
+				E442B9362BD90C3B00E68C69 /* SDWebImage */,
+				E442B9382BD90C3B00E68C69 /* SDWebImageMapKit */,
+			);
 			productName = TZ;
 			productReference = E402EEC02BC53A1C00095E9C /* EventExplorer.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +267,9 @@
 				Base,
 			);
 			mainGroup = E402EEB72BC53A1C00095E9C;
+			packageReferences = (
+				E442B9352BD90C3B00E68C69 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = E402EEC12BC53A1C00095E9C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,12 +291,13 @@
 				E4A09C832BC6A30700FB08F8 /* RedHatDisplay-Bold.ttf in Resources */,
 				E4A09C7A2BC6A30700FB08F8 /* RedHatDisplay-ExtraBoldItalic.ttf in Resources */,
 				E4A09C772BC6A30700FB08F8 /* RedHatDisplay-Light.ttf in Resources */,
-				E4E1DF042BD665BA00E8B38A /* AnnotationView.xib in Resources */,
+				E442B93D2BD929CA00E68C69 /* AnnotationView.xib in Resources */,
 				E4A09C7E2BC6A30700FB08F8 /* RedHatDisplay-Italic.ttf in Resources */,
 				E4A09C812BC6A30700FB08F8 /* RedHatDisplay-Regular.ttf in Resources */,
 				E4A09C7B2BC6A30700FB08F8 /* RedHatDisplay-SemiBold.ttf in Resources */,
 				E402EECB2BC53A1C00095E9C /* Main.storyboard in Resources */,
 				E402EEE22BC5629E00095E9C /* Assets.xcassets in Resources */,
+				E442B9412BD95B4600E68C69 /* AnnotationViewEventSecondPoint.xib in Resources */,
 				E4A09C782BC6A30700FB08F8 /* RedHatDisplay-BoldItalic.ttf in Resources */,
 				E4A09C842BC6A30700FB08F8 /* RedHatDisplay-MediumItalic.ttf in Resources */,
 				E402EEE02BC5511B00095E9C /* RedHatDisplay-Black.ttf in Resources */,
@@ -303,8 +334,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4E1DF022BD6651F00E8B38A /* PinAnnotationView.swift in Sources */,
 				E4E14A742BCD35D70080FF64 /* Model.swift in Sources */,
+				E442B9432BD9611400E68C69 /* AnnotationViewEventSecondPoint.swift in Sources */,
 				E4A09C652BC67B4100FB08F8 /* Category.swift in Sources */,
 				E402EEC82BC53A1C00095E9C /* MapViewController.swift in Sources */,
 				E402EEC42BC53A1C00095E9C /* AppDelegate.swift in Sources */,
@@ -539,6 +570,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E442B9352BD90C3B00E68C69 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E442B9362BD90C3B00E68C69 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E442B9352BD90C3B00E68C69 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		E442B9382BD90C3B00E68C69 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E442B9352BD90C3B00E68C69 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E402EEB82BC53A1C00095E9C /* Project object */;
 }

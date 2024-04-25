@@ -22,12 +22,17 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
   var currentFilter = ObjectStore.shared.arrayCategories[0]
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
-  var annotation = MKPointAnnotation()
   var coordinate = CLLocationCoordinate2D()
   let module = MapModule()
+  let identifier = "CustomAnnotation"
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    mapView.register(AnnotationView.self, 
+                     forAnnotationViewWithReuseIdentifier: String(describing: AnnotationView.self))
+    mapView.register(AnnotationViewEventSecondPoint.self,
+                     forAnnotationViewWithReuseIdentifier: String(describing: AnnotationViewEventSecondPoint.self))
     
     module.$pinTableArray.sink { array in
       print(array)
@@ -130,7 +135,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     for record in arrayPoints {
       let latitude = record.fields.latitudeLocation
       let longtitude = record.fields.longitudeLocation
-      let annotation = CustomAnnotation(latitude: latitude, lontitude: longtitude, title: "", image: record.fields.friendAvatar?.url)
+      let annotation = CustomAnnotation(latitude: latitude, lontitude: longtitude, title: "", image: record.fields.friendAvatar?.url, icon: record.fields.icon, usersGoing: record.fields.usersGoing, friendsAreGoing: record.fields.friendsAreGoing)
       points.append(annotation)
     }
     
@@ -159,22 +164,21 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    guard !(annotation is MKUserLocation) else { return nil }
+    guard let customAnnotation = annotation as? CustomAnnotation else { return nil }
     
-    let identifier = "CustomAnnotation"
-    var annotationView: MKAnnotationView?
-    
-    if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
-      annotationView = dequeuedView
-    } else {
-      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-      annotationView?.frame = CGRect(x: 0, y: 0, width: 14.67, height: 12.06)
-      let customAnnotationView = AnnotationView(frame: annotationView!.bounds)
-      annotationView?.addSubview(customAnnotationView)
+    if !customAnnotation.friendsAreGoing {
       
+      let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: AnnotationViewEventSecondPoint.self)) as? AnnotationViewEventSecondPoint
+      annotationViewEventSecondPoint?.display(annotation)
+      
+      return annotationViewEventSecondPoint
+    } else {
+      
+      let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: AnnotationView.self)) as! AnnotationView
+      annotationView.display(annotation)
+      return annotationView
     }
     
-    return annotationView
   }
   
 }
