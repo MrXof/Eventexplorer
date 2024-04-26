@@ -33,7 +33,7 @@ class MapViewController: UIViewController {
     configureLocationButton()
     setupMapView()
     setupBindings()
-    mapViewRegister()
+    settingsMap()
   }
   
   func createCornerRadius() {
@@ -95,7 +95,7 @@ class MapViewController: UIViewController {
     }.store(in: &cancellables)
   }
   
-  func mapViewRegister() {
+  func settingsMap() {
     mapView.register(PinWithFriendAnnotationView.self,
                      forAnnotationViewWithReuseIdentifier: String(describing: PinWithFriendAnnotationView.self))
     mapView.register(PinAnnotationView.self,
