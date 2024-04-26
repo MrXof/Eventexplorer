@@ -1,5 +1,5 @@
 //
-//  AnnotationViewEventSecondPoint.swift
+//  PinAnnotationView.swift
 //  EventExplorer
 //
 //  Created by Даниил Чугуевский on 24.04.2024.
@@ -10,14 +10,12 @@ import UIKit
 import MapKit
 import SDWebImage
 
-class AnnotationViewEventSecondPoint: MKAnnotationView {
+class PinAnnotationView: MKAnnotationView {
   
   @IBOutlet private weak var triangleView: UIView!
   @IBOutlet private weak var labelIcon: UILabel!
   @IBOutlet private weak var labelUsersGoing: UILabel!
   
-  private var rectangleView: UIView!
-  let imageView = UIImageView()
   var shapeLayer = CAShapeLayer()
   
   override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
@@ -42,21 +40,21 @@ class AnnotationViewEventSecondPoint: MKAnnotationView {
   }
   
   private func drawTriangle(at origin: CGPoint, with size: CGSize) {
-      let trianglePath = UIBezierPath()
-      trianglePath.move(to: CGPoint(x: origin.x + size.width / 2, y: origin.y + size.height))
-      trianglePath.addLine(to: CGPoint(x: origin.x, y: origin.y))
-      trianglePath.addLine(to: CGPoint(x: origin.x + size.width, y: origin.y))
-      trianglePath.close()
-      
-      shapeLayer.path = trianglePath.cgPath
-      shapeLayer.strokeColor = UIColor.white.cgColor
-      shapeLayer.fillColor = UIColor.white.cgColor
-      
-      layer.addSublayer(shapeLayer)
+    let trianglePath = UIBezierPath()
+    trianglePath.move(to: CGPoint(x: origin.x + size.width / 2, y: origin.y + size.height))
+    trianglePath.addLine(to: CGPoint(x: origin.x, y: origin.y))
+    trianglePath.addLine(to: CGPoint(x: origin.x + size.width, y: origin.y))
+    trianglePath.close()
+    
+    shapeLayer.path = trianglePath.cgPath
+    shapeLayer.strokeColor = UIColor.white.cgColor
+    shapeLayer.fillColor = UIColor.white.cgColor
+    
+    layer.addSublayer(shapeLayer)
   }
   
   func display(_ annotation: MKAnnotation) {
-    guard let customAnnotation = annotation as? CreateCustomAnnotation,
+    guard let customAnnotation = annotation as? PinAnnotation,
           let friendsIcon = customAnnotation.icon else { return }
     
     labelUsersGoing.text = "\(customAnnotation.usersGoing)"

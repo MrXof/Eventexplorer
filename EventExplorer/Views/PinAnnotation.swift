@@ -1,5 +1,5 @@
 //
-//  CreateCustomAnnotation.swift
+//  PinAnnotation.swift
 //  EventExplorer
 //
 //  Created by Даниил Чугуевский on 22.04.2024.
@@ -8,14 +8,14 @@
 import Foundation
 import MapKit
 
-class CreateCustomAnnotation: NSObject, MKAnnotation {
+class PinAnnotation: NSObject, MKAnnotation {
   
   let coordinate: CLLocationCoordinate2D
   let image: String?
   let icon: String?
   let usersGoing: Int
   let friendsAreGoing: Bool
-  weak var annotationView: AnnotationView?
+  weak var annotationView: PinWithFriendAnnotationView?
 
   init(latitude: Double, lontitude: Double, image: String?, icon: String?, usersGoing: Int, friendsAreGoing: Bool) {
     self.coordinate = CLLocationCoordinate2DMake(latitude, lontitude)

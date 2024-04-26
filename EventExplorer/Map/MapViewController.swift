@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import Combine
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MapViewController: UIViewController {
   
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
@@ -72,17 +72,105 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     locationButton.configuration?.contentInsets.leading = 0
   }
   
-  //MARK: - CoolectionView
+  //MARK: - Other settings
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return ObjectStore.shared.arrayCategories.count
+  func setupMapView() {
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    mapView.delegate = self
+    locationManager.delegate = self
+    self.locationManager.requestWhenInUseAuthorization()
+    
+    collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
+    if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      layout.scrollDirection = .horizontal
+    }
+    locationManager.startUpdatingLocation()
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
-    cell.display(ObjectStore.shared.arrayCategories[indexPath.row], currentFilter == ObjectStore.shared.arrayCategories[indexPath.row])
-    return cell
+  func setupBindings() {
+    module.$pinTableArray.sink { array in
+      print(array)
+      self.addPointsToMap(array)
+    }.store(in: &cancellables)
   }
+  
+  func mapViewRegister() {
+    mapView.register(PinWithFriendAnnotationView.self,
+                     forAnnotationViewWithReuseIdentifier: String(describing: PinWithFriendAnnotationView.self))
+    mapView.register(PinAnnotationView.self,
+                     forAnnotationViewWithReuseIdentifier: String(describing: PinAnnotationView.self))
+  }
+  
+  //MARK: - Annotation and map settings
+  
+  func addPointsToMap(_ points: [AirtableRecord<Pin>]) {
+    let oldAnnotation = self.mapView.annotations
+    mapView.removeAnnotations(oldAnnotation)
+    
+    let points = generateAnnotations(from: points)
+    mapView.addAnnotations(points)
+  }
+  
+  func generateAnnotations(from points: [AirtableRecord<Pin>]) -> [PinAnnotation] {
+    var arrayPoints: [PinAnnotation] = []
+    
+    guard !points.isEmpty else {
+      return arrayPoints
+    }
+    
+    for record in points {
+      let latitude = record.fields.latitudeLocation
+      let longtitude = record.fields.longitudeLocation
+      let annotation = PinAnnotation(latitude: latitude, lontitude: longtitude, image: record.fields.friendAvatar?.url, icon: record.fields.icon, usersGoing: record.fields.usersGoing, friendsAreGoing: record.fields.friendsAreGoing)
+      arrayPoints.append(annotation)
+    }
+    
+    return arrayPoints
+  }
+  
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    let latitude = 48.467707
+    let longitude = 35.050814
+    
+    let initialLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    
+    let regionRadius: CLLocationDistance = 2000
+    let coordinateRegion = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+    mapView.setRegion(coordinateRegion, animated: true)
+  }
+  
+}
+
+//MARK: - Extantion
+
+extension MapViewController: MKMapViewDelegate {
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    guard let customAnnotation = annotation as? PinAnnotation else { return nil }
+    
+    if !customAnnotation.friendsAreGoing {
+      
+      let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
+      annotationViewEventSecondPoint?.display(annotation)
+      
+      return annotationViewEventSecondPoint
+    } else {
+      
+      let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinWithFriendAnnotationView.self)) as! PinWithFriendAnnotationView
+      annotationView.display(annotation)
+      return annotationView
+    }
+    
+  }
+  
+}
+
+extension MapViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     var indexesToReload: [IndexPath] = []
@@ -96,108 +184,18 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     collectionView.reloadItems(at: indexesToReload)
   }
   
-  func addPoints(pointsArray: [AirtableRecord<Pin>]) {
-    
-    let oldAnnotation = self.mapView.annotations
-    mapView.removeAnnotations(oldAnnotation)
-    
-    let points = generatePoints(arrayPoints: pointsArray)
-    mapView.addAnnotations(points)
-    
+}
+
+extension MapViewController: UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return ObjectStore.shared.arrayCategories.count
   }
   
-  func generatePoints(arrayPoints: [AirtableRecord<Pin>]) -> [CreateCustomAnnotation] {
-    
-    var points: [CreateCustomAnnotation] = []
-    
-    guard !arrayPoints.isEmpty else {
-      return points
-    }
-    
-    for record in arrayPoints {
-      let latitude = record.fields.latitudeLocation
-      let longtitude = record.fields.longitudeLocation
-      let annotation = CreateCustomAnnotation(latitude: latitude, lontitude: longtitude, image: record.fields.friendAvatar?.url, icon: record.fields.icon, usersGoing: record.fields.usersGoing, friendsAreGoing: record.fields.friendsAreGoing)
-      points.append(annotation)
-    }
-    
-    return points
-  }
-  
-  func setupMapView() {
-    
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    mapView.delegate = self
-    locationManager.delegate = self
-    self.locationManager.requestWhenInUseAuthorization()
-    
-    collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
-    if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-      layout.scrollDirection = .horizontal
-    }
-    locationManager.startUpdatingLocation()
-    
-  }
-  
-  func setupBindings() {
-    
-    module.$pinTableArray.sink { array in
-      print(array)
-      self.addPoints(pointsArray: array)
-    }.store(in: &cancellables)
-    
-  }
-  
-  func mapViewRegister() {
-    
-    mapView.register(AnnotationView.self,
-                     forAnnotationViewWithReuseIdentifier: String(describing: AnnotationView.self))
-    mapView.register(AnnotationViewEventSecondPoint.self,
-                     forAnnotationViewWithReuseIdentifier: String(describing: AnnotationViewEventSecondPoint.self))
-    
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
+    cell.display(ObjectStore.shared.arrayCategories[indexPath.row], currentFilter == ObjectStore.shared.arrayCategories[indexPath.row])
+    return cell
   }
   
 }
-
-extension MapViewController: CLLocationManagerDelegate {
-  
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-    let latitude = 48.467707
-    let longitude = 35.050814
-    
-    let initialLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    
-    let regionRadius: CLLocationDistance = 2000
-    let coordinateRegion = MKCoordinateRegion(center: initialLocation, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-    mapView.setRegion(coordinateRegion, animated: true)
-    
-  }
-  
-}
-
-extension MapViewController: MKMapViewDelegate {
-  
-  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    guard let customAnnotation = annotation as? CreateCustomAnnotation else { return nil }
-    
-    if !customAnnotation.friendsAreGoing {
-      
-      let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: AnnotationViewEventSecondPoint.self)) as? AnnotationViewEventSecondPoint
-      annotationViewEventSecondPoint?.display(annotation)
-      
-      return annotationViewEventSecondPoint
-    } else {
-      
-      let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: AnnotationView.self)) as! AnnotationView
-      annotationView.display(annotation)
-      return annotationView
-    }
-    
-  }
-  
-}
-
-
-
