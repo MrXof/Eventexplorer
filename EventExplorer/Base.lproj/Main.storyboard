@@ -267,6 +267,7 @@
                     <connections>
                         <outlet property="blurHeaderView" destination="cQ1-f0-ges" id="UfG-lj-JWo"/>
                         <outlet property="collectionView" destination="lNp-ih-P2u" id="O8p-8z-laR"/>
+                        <outlet property="countPeople" destination="RjW-HD-6hw" id="2Z1-Wn-85I"/>
                         <outlet property="headerView" destination="ZqI-Xb-PDM" id="gMp-Gv-mHb"/>
                         <outlet property="locationButton" destination="ahu-0J-O0Z" id="Pbu-ud-ghE"/>
                         <outlet property="mapView" destination="647-jH-Yil" id="WWB-Yp-a6d"/>
