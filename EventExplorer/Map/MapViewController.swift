@@ -11,13 +11,22 @@ import CoreLocation
 import Combine
 
 class MapViewController: UIViewController {
-  
+  //MapView @IBOutlet
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var headerView: UIView!
   @IBOutlet private weak var blurHeaderView: UIVisualEffectView!
   @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var countPeople: UILabel!
+  //PopUp @IBOutlet
+  @IBOutlet weak var popUpView: UIView!
+  @IBOutlet weak var friendsGoingLabel: UILabel!
+  @IBOutlet weak var addressLabel: UILabel!
+  @IBOutlet weak var nameButton: UILabel!
+  @IBOutlet weak var cancelButton: UIButton!
+  
+  @IBOutlet weak var openDetailsButton: UIButton!
+  @IBOutlet weak var blurPopUpView: UIVisualEffectView!
   
   var currentFilter = ObjectStore.shared.arrayCategories[0]
   let locationManager = CLLocationManager()
@@ -34,6 +43,7 @@ class MapViewController: UIViewController {
     setupMapView()
     setupBindings()
     settingsMap()
+    settingsPopup()
   }
   
   func createCornerRadius() {
@@ -42,15 +52,24 @@ class MapViewController: UIViewController {
     blurHeaderView.layer.cornerRadius = 21
     blurHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
     blurHeaderView.clipsToBounds = true
+    
+    //popUpView
+    popUpView.layer.cornerRadius = 21
+    popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    blurPopUpView.layer.cornerRadius = 21
+    blurPopUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    blurPopUpView.clipsToBounds = true
   }
   
   func createShadowView(
     color: UIColor = .black,
-    alpha: Float = 0.3,
+    alpha: Float = 1,
     x: CGFloat = 0,
     y: CGFloat = 20,
+    PopUpY: CGFloat = 2,
     blur: CGFloat = 25,
-    spread: CGFloat = -12
+    spread: CGFloat = -12,
+    popUpSpread: CGFloat = -5
   )
   {
     headerView.layer.shadowColor = color.cgColor
@@ -58,6 +77,13 @@ class MapViewController: UIViewController {
     headerView.layer.shadowOffset = CGSize(width: x, height: y)
     headerView.layer.shadowRadius = blur
     headerView.layer.shadowRadius += spread
+    
+    //popUpView
+    popUpView.layer.shadowColor = color.cgColor
+    popUpView.layer.shadowOpacity = alpha
+    popUpView.layer.shadowOffset = CGSize(width: x, height: PopUpY)
+    popUpView.layer.shadowRadius = blur
+    popUpView.layer.shadowRadius += popUpSpread
   }
   
   func configureLocationButton() {
@@ -102,6 +128,21 @@ class MapViewController: UIViewController {
                      forAnnotationViewWithReuseIdentifier: String(describing: PinAnnotationView.self))
   }
   
+  func settingsPopup() {
+    popUpView.backgroundColor = UIColor.white
+    popUpView.alpha = 0
+    
+    
+    let attributs : [NSAttributedString.Key: Any] = 
+    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
+      .foregroundColor: UIColor.white
+    ]
+    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
+    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
+    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
+    openDetailsButton.configuration?.contentInsets.leading = 0
+  }
+  
   //MARK: - Annotation and map settings
   
   func addPointsToMap(_ points: [AirtableRecord<Pin>]) {
@@ -131,6 +172,8 @@ class MapViewController: UIViewController {
   
 }
 
+//MARK: - Extension
+
 extension MapViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -145,8 +188,6 @@ extension MapViewController: CLLocationManagerDelegate {
   }
   
 }
-
-//MARK: - Extantion
 
 extension MapViewController: MKMapViewDelegate {
   
@@ -166,6 +207,15 @@ extension MapViewController: MKMapViewDelegate {
       return annotationView
     }
     
+  }
+  
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+      if let annotation = view.annotation {
+        UIView.animate(withDuration: 0.5) {
+          self.popUpView.alpha = 1
+        }
+        
+      }
   }
   
 }
