@@ -19,7 +19,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
   @IBOutlet private weak var categoryNameViewCell: UIView!
   
   func display(_ сategories: Category, _ isSelected: Bool) {
-    
     labelCategories.text = сategories.name
     switch сategories {
     case Category.allActivities:

@@ -41,7 +41,6 @@ class MapViewController: UIViewController {
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
-  let identifier = "CustomAnnotation"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -137,7 +136,7 @@ class MapViewController: UIViewController {
   }
   
   func setupBindings() {
-    module.$pinTableArray.sink { array in
+    module.$pinArray.sink { array in
       print(array)
       self.addPointsToMap(array)
     }.store(in: &cancellables)
@@ -185,7 +184,17 @@ class MapViewController: UIViewController {
     for record in points {
       let latitude = record.fields.latitudeLocation
       let longtitude = record.fields.longitudeLocation
-      let annotation = PinAnnotation(latitude: latitude, lontitude: longtitude, image: record.fields.friendAvatar?.url, icon: record.fields.icon, usersGoing: record.fields.usersGoing, friendsAreGoing: record.fields.friendsAreGoing, name: record.fields.name, adress: record.fields.address, category: record.fields.category, date: record.fields.date, priceTier: record.fields.priceTier)
+      let annotation = PinAnnotation(latitude: latitude,
+                                     lontitude: longtitude,
+                                     image: record.fields.friendAvatar?.url,
+                                     icon: record.fields.icon,
+                                     usersGoing: record.fields.usersGoing,
+                                     friendsAreGoing: record.fields.friendsAreGoing,
+                                     name: record.fields.name,
+                                     adress: record.fields.address,
+                                     category: record.fields.category,
+                                     date: record.fields.date,
+                                     priceTier: record.fields.priceTier)
       arrayPoints.append(annotation)
     }
     
@@ -224,7 +233,6 @@ extension MapViewController: MKMapViewDelegate {
     guard let customAnnotation = annotation as? PinAnnotation else { return nil }
     
     if !customAnnotation.friendsAreGoing {
-      
       let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
       annotationViewEventSecondPoint?.display(annotation)
       
@@ -235,7 +243,6 @@ extension MapViewController: MKMapViewDelegate {
       annotationView.display(annotation)
       return annotationView
     }
-    
   }
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -250,20 +257,18 @@ extension MapViewController: MKMapViewDelegate {
     usersGoingLabel.text = "\(annotation.usersGoing) people going"
     iconCategoryLabel.text = annotation.icon
     categoryLabel.text = annotation.category
-    priceLabel.text = annotation.priceTier.stringValue()
+    priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
     let dateFormatter = ISO8601DateFormatter()
     dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-    let dateObj = dateFormatter.date(from: annotation.date)
-    
-    let dateFormatterDate = DateFormatter()
-    dateFormatterDate.dateFormat = "MMMM d"
-    
-    let dateFormatterTime = DateFormatter()
-    dateFormatterTime.dateFormat = "h: mm a"
-    
-    if let date = dateObj {
+    if let date = dateFormatter.date(from: annotation.date) {
+      let dateFormatterDate = DateFormatter()
+      dateFormatterDate.dateFormat = "MMMM d"
+      
+      let dateFormatterTime = DateFormatter()
+      dateFormatterTime.dateFormat = "h:mm a"
+      
       let datePart = dateFormatterDate.string(from: date)
       let timePart = dateFormatterTime.string(from: date)
       self.dateLabel.text = datePart

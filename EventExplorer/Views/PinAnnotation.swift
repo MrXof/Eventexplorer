@@ -20,9 +20,18 @@ class PinAnnotation: NSObject, MKAnnotation {
   let category: String
   let date: String
   let priceTier: PriceTier
-  weak var annotationView: PinWithFriendAnnotationView?
 
-  init(latitude: Double, lontitude: Double, image: String?, icon: String?, usersGoing: Int, friendsAreGoing: Bool, name: String, adress: String, category: String, date: String, priceTier: PriceTier) {
+  init(latitude: Double,
+       lontitude: Double,
+       image: String?,
+       icon: String?,
+       usersGoing: Int,
+       friendsAreGoing: Bool,
+       name: String,
+       adress: String,
+       category: String,
+       date: String,
+       priceTier: PriceTier) {
     self.coordinate = CLLocationCoordinate2DMake(latitude, lontitude)
     self.image = image
     self.icon = icon

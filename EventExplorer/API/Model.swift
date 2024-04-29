@@ -65,7 +65,7 @@ enum PriceTier: String, Decodable {
   case twentyPlus = "20_plus"
   case fiftyPlus = "50_plus"
   
-  func stringValue() -> String {
+  func title() -> String {
     switch self {
     case .below:
       return "$10-"
