@@ -26,11 +26,12 @@ struct AirtableRecord<T: Decodable>: Decodable {
 // MARK: - Pin
 struct Pin {
   
-  let date, address, name: String
+  let address, name: String
   let priceTier: PriceTier
   let icon: String
   let category: Category
   let latitudeLocation, longitudeLocation: Double
+  let date: String
   let usersGoing: Int
   let friendsAreGoing: Bool
   let friendAvatar: FriendAvatar?
@@ -100,6 +101,7 @@ extension Pin: Decodable {
     let locationArray = location.components(separatedBy: ", ")
     latitudeLocation = Double(locationArray[0])!
     longitudeLocation = Double(locationArray[1])!
+    
   }
   
 }
