@@ -9,14 +9,14 @@ import Foundation
 
 class MapModule {
   
-  @Published var pinTableArray = [AirtableRecord<Pin>]()
+  @Published var pinArray = [AirtableRecord<Pin>]()
   
   private func getPinData() {
-    NetworkManager.shared.getPinTableData { response in
+    NetworkManager.shared.getPinData { response in
       switch response {
       case .success(let pinTable):
         DispatchQueue.main.async {
-          self.pinTableArray.append(contentsOf: pinTable.records)
+          self.pinArray.append(contentsOf: pinTable.records)
         }
       case .failure(let error):
         print(error)

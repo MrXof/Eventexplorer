@@ -15,14 +15,33 @@ class PinAnnotation: NSObject, MKAnnotation {
   let icon: String?
   let usersGoing: Int
   let friendsAreGoing: Bool
-  weak var annotationView: PinWithFriendAnnotationView?
+  let name: String
+  let adress: String
+  let category: Category
+  let date: String
+  let priceTier: PriceTier
 
-  init(latitude: Double, lontitude: Double, image: String?, icon: String?, usersGoing: Int, friendsAreGoing: Bool) {
-    self.coordinate = CLLocationCoordinate2DMake(latitude, lontitude)
+  init(latitude: Double,
+       longitude: Double,
+       image: String?,
+       icon: String?,
+       usersGoing: Int,
+       friendsAreGoing: Bool,
+       name: String,
+       adress: String,
+       category: Category,
+       date: String,
+       priceTier: PriceTier) {
+    self.coordinate = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
     self.image = image
     self.icon = icon
     self.usersGoing = usersGoing
     self.friendsAreGoing = friendsAreGoing
+    self.name = name
+    self.adress = adress
+    self.category = category
+    self.date = date
+    self.priceTier = priceTier
   }
   
 }

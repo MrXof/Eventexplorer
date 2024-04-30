@@ -28,7 +28,8 @@ struct Pin {
   
   let date, address, name: String
   let priceTier: PriceTier
-  let icon, category: String
+  let icon: String
+  let category: Category
   let latitudeLocation, longitudeLocation: Double
   let usersGoing: Int
   let friendsAreGoing: Bool
@@ -65,6 +66,19 @@ enum PriceTier: String, Decodable {
   case twentyPlus = "20_plus"
   case fiftyPlus = "50_plus"
   
+  func title() -> String {
+    switch self {
+    case .below:
+      return "$10-"
+    case .tenPlus:
+      return "$10+"
+    case .twentyPlus:
+      return "$20+"
+    case .fiftyPlus:
+      return "$50+"
+    }
+  }
+  
 }
 
 extension Pin: Decodable {
@@ -76,7 +90,7 @@ extension Pin: Decodable {
     address = try container.decode(String.self, forKey: .address)
     name = try container.decode(String.self, forKey: .name)
     icon = try container.decode(String.self, forKey: .icon)
-    category = try container.decode(String.self, forKey: .category)
+    category = try container.decode(Category.self, forKey: .category)
     usersGoing = try container.decode(Int.self, forKey: .usersGoing)
     friendAvatar = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)?.first ??  nil
     priceTier = try container.decode(PriceTier.self, forKey: .priceTier)

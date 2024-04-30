@@ -17,7 +17,7 @@ class PinAnnotationView: MKAnnotationView {
   @IBOutlet private weak var labelUsersGoing: UILabel!
   
   var shapeLayer = CAShapeLayer()
-  
+
   override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     
@@ -59,6 +59,7 @@ class PinAnnotationView: MKAnnotationView {
     
     labelUsersGoing.text = "\(customAnnotation.usersGoing)"
     labelIcon.text = friendsIcon
+    self.annotation = customAnnotation
   }
   
   private func nibInstantiate(autoResizingMask: UIView.AutoresizingMask = []) -> UIView {

@@ -11,19 +11,36 @@ import CoreLocation
 import Combine
 
 class MapViewController: UIViewController {
-  
+  //MapView @IBOutlet
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var headerView: UIView!
   @IBOutlet private weak var blurHeaderView: UIVisualEffectView!
   @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var countPeople: UILabel!
+  //PopUp @IBOutlet
+  @IBOutlet weak var popUpView: UIView!
+  @IBOutlet weak var usersGoingLabel: UILabel!
+  @IBOutlet weak var addressLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var categoryView: UIView!
+  @IBOutlet weak var dateView: UIView!
+  @IBOutlet weak var priceView: UIView!
+  @IBOutlet weak var timeView: UIView!
+  @IBOutlet weak var openDetailsButton: UIButton!
+  @IBOutlet weak var blurPopUpView: UIVisualEffectView!
+  //popUpViewInfoTeg
+  @IBOutlet weak var iconCategoryLabel: UILabel!
+  @IBOutlet weak var categoryLabel: UILabel!
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet weak var priceLabel: UILabel!
   
   var currentFilter = ObjectStore.shared.arrayCategories[0]
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
-  let identifier = "CustomAnnotation"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +51,8 @@ class MapViewController: UIViewController {
     setupMapView()
     setupBindings()
     settingsMap()
+    settingsPopup()
+    addBorderForView()
   }
   
   func createCornerRadius() {
@@ -42,6 +61,13 @@ class MapViewController: UIViewController {
     blurHeaderView.layer.cornerRadius = 21
     blurHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
     blurHeaderView.clipsToBounds = true
+    
+    //popUpView
+    popUpView.layer.cornerRadius = 21
+    popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    blurPopUpView.layer.cornerRadius = 21
+    blurPopUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    blurPopUpView.clipsToBounds = true
   }
   
   func createShadowView(
@@ -49,8 +75,10 @@ class MapViewController: UIViewController {
     alpha: Float = 0.3,
     x: CGFloat = 0,
     y: CGFloat = 20,
+    PopUpY: CGFloat = 2,
     blur: CGFloat = 25,
-    spread: CGFloat = -12
+    spread: CGFloat = -12,
+    popUpSpread: CGFloat = -5
   )
   {
     headerView.layer.shadowColor = color.cgColor
@@ -58,6 +86,13 @@ class MapViewController: UIViewController {
     headerView.layer.shadowOffset = CGSize(width: x, height: y)
     headerView.layer.shadowRadius = blur
     headerView.layer.shadowRadius += spread
+    
+    //popUpView
+    popUpView.layer.shadowColor = color.cgColor
+    popUpView.layer.shadowOpacity = alpha
+    popUpView.layer.shadowOffset = CGSize(width: x, height: PopUpY)
+    popUpView.layer.shadowRadius = blur
+    popUpView.layer.shadowRadius += popUpSpread
   }
   
   func configureLocationButton() {
@@ -70,6 +105,18 @@ class MapViewController: UIViewController {
     locationButton.setAttributedTitle(attributedString, for: .normal)
     locationButton.configuration = locationButton.configuration ?? .plain()
     locationButton.configuration?.contentInsets.leading = 0
+  }
+  
+  func addBorderForView() {
+    let borderColor = UIColor(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+    categoryView.layer.borderWidth = 1
+    categoryView.layer.borderColor = borderColor.cgColor
+    dateView.layer.borderWidth = 1
+    dateView.layer.borderColor = borderColor.cgColor
+    timeView.layer.borderWidth = 1
+    timeView.layer.borderColor = borderColor.cgColor
+    priceView.layer.borderWidth = 1
+    priceView.layer.borderColor = borderColor.cgColor
   }
   
   //MARK: - Other settings
@@ -89,7 +136,7 @@ class MapViewController: UIViewController {
   }
   
   func setupBindings() {
-    module.$pinTableArray.sink { array in
+    module.$pinArray.sink { array in
       print(array)
       self.addPointsToMap(array)
     }.store(in: &cancellables)
@@ -100,6 +147,21 @@ class MapViewController: UIViewController {
                      forAnnotationViewWithReuseIdentifier: String(describing: PinWithFriendAnnotationView.self))
     mapView.register(PinAnnotationView.self,
                      forAnnotationViewWithReuseIdentifier: String(describing: PinAnnotationView.self))
+  }
+  
+  func settingsPopup() {
+    popUpView.backgroundColor = UIColor.white
+    popUpView.alpha = 0
+    popUpView.isHidden = true
+    
+    let attributs : [NSAttributedString.Key: Any] = 
+    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
+      .foregroundColor: UIColor.white
+    ]
+    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
+    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
+    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
+    openDetailsButton.configuration?.contentInsets.leading = 0
   }
   
   //MARK: - Annotation and map settings
@@ -121,15 +183,34 @@ class MapViewController: UIViewController {
     
     for record in points {
       let latitude = record.fields.latitudeLocation
-      let longtitude = record.fields.longitudeLocation
-      let annotation = PinAnnotation(latitude: latitude, lontitude: longtitude, image: record.fields.friendAvatar?.url, icon: record.fields.icon, usersGoing: record.fields.usersGoing, friendsAreGoing: record.fields.friendsAreGoing)
+      let longitude = record.fields.longitudeLocation
+      let annotation = PinAnnotation(latitude: latitude,
+                                     longitude: longitude,
+                                     image: record.fields.friendAvatar?.url,
+                                     icon: record.fields.icon,
+                                     usersGoing: record.fields.usersGoing,
+                                     friendsAreGoing: record.fields.friendsAreGoing,
+                                     name: record.fields.name,
+                                     adress: record.fields.address,
+                                     category: record.fields.category,
+                                     date: record.fields.date,
+                                     priceTier: record.fields.priceTier)
       arrayPoints.append(annotation)
     }
     
     return arrayPoints
   }
+
+  @IBAction func cancelButton(_ sender: Any) {
+    UIView.animate(withDuration: 0.5) {
+      self.popUpView.alpha = 0
+      self.popUpView.isHidden = true
+    }
+  }
   
 }
+
+//MARK: - Extension
 
 extension MapViewController: CLLocationManagerDelegate {
   
@@ -146,15 +227,12 @@ extension MapViewController: CLLocationManagerDelegate {
   
 }
 
-//MARK: - Extantion
-
 extension MapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     guard let customAnnotation = annotation as? PinAnnotation else { return nil }
     
     if !customAnnotation.friendsAreGoing {
-      
       let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
       annotationViewEventSecondPoint?.display(annotation)
       
@@ -165,7 +243,37 @@ extension MapViewController: MKMapViewDelegate {
       annotationView.display(annotation)
       return annotationView
     }
+  }
+  
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+      UIView.animate(withDuration: 0.5) {
+        self.popUpView.alpha = 1
+        self.popUpView.isHidden = false
+      }
+    guard let annotation = view.annotation as? PinAnnotation else { return }
     
+    nameLabel.text = annotation.name
+    addressLabel.text = annotation.adress
+    usersGoingLabel.text = "\(annotation.usersGoing) people going"
+    iconCategoryLabel.text = annotation.icon
+    categoryLabel.text = annotation.category.name
+    priceLabel.text = annotation.priceTier.title()
+    
+    //changeDateFormat
+    let dateFormatter = ISO8601DateFormatter()
+    dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+    if let date = dateFormatter.date(from: annotation.date) {
+      let dateFormatterDate = DateFormatter()
+      dateFormatterDate.dateFormat = "MMMM d"
+      
+      let dateFormatterTime = DateFormatter()
+      dateFormatterTime.dateFormat = "h:mm a"
+      
+      let datePart = dateFormatterDate.string(from: date)
+      let timePart = dateFormatterTime.string(from: date)
+      self.dateLabel.text = datePart
+      self.timeLabel.text = timePart
+    }
   }
   
 }

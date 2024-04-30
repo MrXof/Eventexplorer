@@ -63,6 +63,7 @@ class PinWithFriendAnnotationView: MKAnnotationView {
     friendsIconView.backgroundColor = UIColor.white
     
     labelFriendsIcon.text = friendsIcon
+    self.annotation = customAnnotation
   }
 
 }
