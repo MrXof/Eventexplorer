@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/daniilcuguevskij/Projects/Git/EducationSwift/TZ/EventExplorer.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
