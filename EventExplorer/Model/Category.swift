@@ -1,5 +1,5 @@
 //
-//  model.swift
+//  Category.swift
 //  EventExplorer
 //
 //  Created by Даниил Чугуевский on 10.04.2024.
@@ -7,18 +7,18 @@
 
 import Foundation
 
-enum Category {
+enum Category: String, Equatable, Decodable {
   
-  case allActivities
+  case allActivities = "all_activities"
   case education
   case culture
   case entertainment
   case sport
   case shopping
-  case foodAndDrink
-  case healthAndWellness
+  case foodAndDrink = "food_and_drink"
+  case healthAndWellness = "health_and_wellness"
   
-  var image: String? {
+  var icon: String? {
     switch self {
     case .allActivities:
       return nil
