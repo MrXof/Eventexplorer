@@ -24,7 +24,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     case Category.allActivities:
       iconeViewCell.isHidden = true
     default:
-      iconLabel.text = сategories.image
+      iconLabel.text = сategories.icon
       iconeViewCell.isHidden = false
     }
     

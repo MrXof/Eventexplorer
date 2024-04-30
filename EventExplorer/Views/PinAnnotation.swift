@@ -17,22 +17,22 @@ class PinAnnotation: NSObject, MKAnnotation {
   let friendsAreGoing: Bool
   let name: String
   let adress: String
-  let category: String
+  let category: Category
   let date: String
   let priceTier: PriceTier
 
   init(latitude: Double,
-       lontitude: Double,
+       longitude: Double,
        image: String?,
        icon: String?,
        usersGoing: Int,
        friendsAreGoing: Bool,
        name: String,
        adress: String,
-       category: String,
+       category: Category,
        date: String,
        priceTier: PriceTier) {
-    self.coordinate = CLLocationCoordinate2DMake(latitude, lontitude)
+    self.coordinate = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
     self.image = image
     self.icon = icon
     self.usersGoing = usersGoing

@@ -183,9 +183,9 @@ class MapViewController: UIViewController {
     
     for record in points {
       let latitude = record.fields.latitudeLocation
-      let longtitude = record.fields.longitudeLocation
+      let longitude = record.fields.longitudeLocation
       let annotation = PinAnnotation(latitude: latitude,
-                                     lontitude: longtitude,
+                                     longitude: longitude,
                                      image: record.fields.friendAvatar?.url,
                                      icon: record.fields.icon,
                                      usersGoing: record.fields.usersGoing,
@@ -256,7 +256,7 @@ extension MapViewController: MKMapViewDelegate {
     addressLabel.text = annotation.adress
     usersGoingLabel.text = "\(annotation.usersGoing) people going"
     iconCategoryLabel.text = annotation.icon
-    categoryLabel.text = annotation.category
+    categoryLabel.text = annotation.category.name
     priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
