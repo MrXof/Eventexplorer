@@ -37,7 +37,6 @@ class MapViewController: UIViewController {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   
-//  var currentFilter = ObjectStore.shared.arrayCategories[0]
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
@@ -135,11 +134,7 @@ class MapViewController: UIViewController {
     }
     locationManager.startUpdatingLocation()
     
-    if #available(iOS 13.0, *) {
       mapView.overrideUserInterfaceStyle = .light
-    } else {
-      mapView.mapType = .standard
-    }
   }
   
   func setupBindings() {
@@ -200,7 +195,7 @@ class MapViewController: UIViewController {
                                      name: record.fields.name,
                                      adress: record.fields.address,
                                      category: record.fields.category,
-                                     date: Date(),
+                                     date: record.fields.date,
                                      priceTier: record.fields.priceTier)
       arrayPoints.append(annotation)
     }
@@ -273,22 +268,19 @@ extension MapViewController: MKMapViewDelegate {
     priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
-    let dateFormatter = ISO8601DateFormatter()
-    dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-    if let date = dateFormatter.date(from: annotation.date.ISO8601Format()) {
-      let dateFormatterDate = DateFormatter()
-      dateFormatterDate.dateFormat = "MMMM d"
-      
-      let dateFormatterTime = DateFormatter()
-      dateFormatterTime.dateFormat = "h:mm a"
-      
-      let datePart = dateFormatterDate.string(from: date)
-      let timePart = dateFormatterTime.string(from: date)
-      self.dateLabel.text = datePart
-      self.timeLabel.text = timePart
-    }
+
+    let dateFormatterDate = DateFormatter()
+    dateFormatterDate.dateFormat = "MMMM d"
+    
+    let dateFormatterTime = DateFormatter()
+    dateFormatterTime.dateFormat = "h:mm a"
+    
+    let datePart = dateFormatterDate.string(from: annotation.date)
+    let timePart = dateFormatterTime.string(from: annotation.date)
+    self.dateLabel.text = datePart
+    self.timeLabel.text = timePart
   }
-  
+
 }
 
 extension MapViewController: UICollectionViewDelegate {
