@@ -18,7 +18,7 @@ class PinAnnotation: NSObject, MKAnnotation {
   let name: String
   let adress: String
   let category: Category
-  let date: String
+  let date: Date
   let priceTier: PriceTier
 
   init(latitude: Double,
@@ -30,7 +30,7 @@ class PinAnnotation: NSObject, MKAnnotation {
        name: String,
        adress: String,
        category: Category,
-       date: String,
+       date: Date,
        priceTier: PriceTier) {
     self.coordinate = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
     self.image = image

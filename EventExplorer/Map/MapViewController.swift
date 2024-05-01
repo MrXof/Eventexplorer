@@ -37,10 +37,10 @@ class MapViewController: UIViewController {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   
-  var currentFilter = ObjectStore.shared.arrayCategories[0]
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
+  var canUpdateMapCenter: Bool = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -133,6 +133,8 @@ class MapViewController: UIViewController {
       layout.scrollDirection = .horizontal
     }
     locationManager.startUpdatingLocation()
+    
+      mapView.overrideUserInterfaceStyle = .light
   }
   
   func setupBindings() {
@@ -215,6 +217,8 @@ class MapViewController: UIViewController {
 extension MapViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard canUpdateMapCenter else { return }
+    
     let latitude = 48.467707
     let longitude = 35.050814
     
@@ -245,6 +249,10 @@ extension MapViewController: MKMapViewDelegate {
     }
   }
   
+  func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    canUpdateMapCenter = false
+  }
+  
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       UIView.animate(withDuration: 0.5) {
         self.popUpView.alpha = 1
@@ -260,35 +268,32 @@ extension MapViewController: MKMapViewDelegate {
     priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
-    let dateFormatter = ISO8601DateFormatter()
-    dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-    if let date = dateFormatter.date(from: annotation.date) {
-      let dateFormatterDate = DateFormatter()
-      dateFormatterDate.dateFormat = "MMMM d"
-      
-      let dateFormatterTime = DateFormatter()
-      dateFormatterTime.dateFormat = "h:mm a"
-      
-      let datePart = dateFormatterDate.string(from: date)
-      let timePart = dateFormatterTime.string(from: date)
-      self.dateLabel.text = datePart
-      self.timeLabel.text = timePart
-    }
+
+    let dateFormatterDate = DateFormatter()
+    dateFormatterDate.dateFormat = "MMMM d"
+    
+    let dateFormatterTime = DateFormatter()
+    dateFormatterTime.dateFormat = "h:mm a"
+    
+    let datePart = dateFormatterDate.string(from: annotation.date)
+    let timePart = dateFormatterTime.string(from: annotation.date)
+    self.dateLabel.text = datePart
+    self.timeLabel.text = timePart
   }
-  
+
 }
 
 extension MapViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     var indexesToReload: [IndexPath] = []
-    let filterIndex = ObjectStore.shared.arrayCategories.firstIndex(of: currentFilter)
+    let filterIndex = ObjectStore.shared.arrayCategories.firstIndex(of: module.currentFilter)
     guard let guardIndex = filterIndex else { return }
     
     let resultIndex = IndexPath(item: guardIndex, section: 0)
     indexesToReload.append(resultIndex)
     indexesToReload.append(indexPath)
-    currentFilter = ObjectStore.shared.arrayCategories[indexPath.row]
+    module.applyCurrentFilter(ObjectStore.shared.arrayCategories[indexPath.row])
     collectionView.reloadItems(at: indexesToReload)
   }
   
@@ -302,7 +307,7 @@ extension MapViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
-    cell.display(ObjectStore.shared.arrayCategories[indexPath.row], currentFilter == ObjectStore.shared.arrayCategories[indexPath.row])
+    cell.display(ObjectStore.shared.arrayCategories[indexPath.row], module.currentFilter == ObjectStore.shared.arrayCategories[indexPath.row])
     return cell
   }
   

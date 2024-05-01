@@ -26,11 +26,12 @@ struct AirtableRecord<T: Decodable>: Decodable {
 // MARK: - Pin
 struct Pin {
   
-  let date, address, name: String
+  let address, name: String
   let priceTier: PriceTier
   let icon: String
   let category: Category
   let latitudeLocation, longitudeLocation: Double
+  let date: Date
   let usersGoing: Int
   let friendsAreGoing: Bool
   let friendAvatar: FriendAvatar?
@@ -42,7 +43,6 @@ struct Pin {
     case usersGoing = "users_going"
     case friendAvatars = "friend_avatar"
     case friendsAreGoing = "friends_are_going"
-    
   }
   
 }
@@ -86,7 +86,6 @@ extension Pin: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let location = try container.decode(String.self, forKey: .location)
-    date = try container.decode(String.self, forKey: .date)
     address = try container.decode(String.self, forKey: .address)
     name = try container.decode(String.self, forKey: .name)
     icon = try container.decode(String.self, forKey: .icon)
@@ -94,12 +93,20 @@ extension Pin: Decodable {
     usersGoing = try container.decode(Int.self, forKey: .usersGoing)
     friendAvatar = try container.decodeIfPresent([FriendAvatar].self, forKey: .friendAvatars)?.first ??  nil
     priceTier = try container.decode(PriceTier.self, forKey: .priceTier)
-    
     friendsAreGoing = (try? container.decode(Bool.self, forKey: .friendsAreGoing)) ?? false
     
     let locationArray = location.components(separatedBy: ", ")
     latitudeLocation = Double(locationArray[0])!
     longitudeLocation = Double(locationArray[1])!
+    
+    let dateString = try container.decode(String.self, forKey: .date)
+    let dateFormatter = ISO8601DateFormatter()
+    dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+    if let date = dateFormatter.date(from: dateString) {
+      self.date = date
+    } else {
+      throw DecodingError.dataCorruptedError(forKey: .date, in: container, debugDescription: "Fail")
+    }
   }
   
 }
