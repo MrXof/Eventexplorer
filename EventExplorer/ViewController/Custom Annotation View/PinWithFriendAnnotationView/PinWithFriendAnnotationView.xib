@@ -13,6 +13,7 @@
                 <outlet property="labelFriendsIcon" destination="1Ei-0r-nDH" id="P82-lS-nlo"/>
                 <outlet property="pinImage" destination="gZb-Is-e57" id="kO9-Fo-pCs"/>
                 <outlet property="pinVIew" destination="aio-t9-5iT" id="Gib-PG-5jN"/>
+                <outlet property="rectangleView" destination="dTt-EJ-YhN" id="56L-kj-YDM"/>
                 <outlet property="triangleView" destination="yMT-AW-Hnv" id="nWr-pd-CjH"/>
             </connections>
         </placeholder>

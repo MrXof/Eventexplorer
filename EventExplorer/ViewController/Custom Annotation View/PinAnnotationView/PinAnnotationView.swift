@@ -15,6 +15,7 @@ class PinAnnotationView: MKAnnotationView {
   @IBOutlet private weak var triangleView: UIView!
   @IBOutlet private weak var labelIcon: UILabel!
   @IBOutlet private weak var labelUsersGoing: UILabel!
+  @IBOutlet weak var rectangleView: UIView!
   
   var shapeLayer = CAShapeLayer()
 
@@ -36,7 +37,7 @@ class PinAnnotationView: MKAnnotationView {
     
     drawTriangle(at: triangleView.frame.origin, with: triangleView.frame.size)
     triangleView.layer.bounds = shapeLayer.bounds
-
+    createShadowView()
   }
   
   private func drawTriangle(at origin: CGPoint, with size: CGSize) {
@@ -70,5 +71,26 @@ class PinAnnotationView: MKAnnotationView {
     return view
   }
   
+  func createShadowView(
+    color: UIColor = .black,
+    alpha: Float = 0.25,
+    x: CGFloat = 0,
+    y: CGFloat = 4,
+    blur: CGFloat = 4,
+    spread: CGFloat = 0
+  )
+  {
+    triangleView.layer.shadowColor = color.cgColor
+    triangleView.layer.shadowOpacity = alpha
+    triangleView.layer.shadowOffset = CGSize(width: x, height: y)
+    triangleView.layer.shadowRadius = blur
+    triangleView.layer.shadowRadius += spread
+    
+    rectangleView.layer.shadowColor = color.cgColor
+    rectangleView.layer.shadowOpacity = alpha
+    rectangleView.layer.shadowOffset = CGSize(width: x, height: y)
+    rectangleView.layer.shadowRadius = blur
+    rectangleView.layer.shadowRadius += spread
+  }
 }
 

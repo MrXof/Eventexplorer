@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="647-jH-Yil" userLabel="Map">
-                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-Xb-PDM">
@@ -36,11 +36,12 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <blurEffect style="regular"/>
+                                        <blurEffect style="light"/>
                                     </visualEffectView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahu-0J-O0Z">
                                         <rect key="frame" x="15" y="75" width="262" height="34.333333333333343"/>
@@ -258,11 +259,11 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-S9-vGU">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Keu-se-f4d">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="267"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <blurEffect style="regular"/>
+                                        <blurEffect style="light"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2c-gK-AMY">
                                         <rect key="frame" x="15" y="123.66666666666663" width="378" height="32"/>
@@ -554,16 +555,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="Irc-zh-RBz" secondAttribute="top" constant="-20" id="1De-Ry-4Cv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="647-jH-Yil" secondAttribute="trailing" id="24h-Lz-xDH"/>
                             <constraint firstAttribute="bottom" secondItem="zza-aF-RyO" secondAttribute="bottom" id="5Ug-Bg-Api"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="80e-JZ-rDR"/>
+                            <constraint firstItem="647-jH-Yil" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="LIP-Mf-4c5"/>
+                            <constraint firstItem="647-jH-Yil" firstAttribute="top" secondItem="ZqI-Xb-PDM" secondAttribute="top" id="MC9-H8-91M"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N5S-Dm-uS9"/>
-                            <constraint firstItem="647-jH-Yil" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QAj-Cj-6lV"/>
-                            <constraint firstAttribute="bottom" secondItem="647-jH-Yil" secondAttribute="bottom" id="T6D-mV-Z3g"/>
                             <constraint firstItem="zza-aF-RyO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Uph-ZP-fTL"/>
-                            <constraint firstItem="647-jH-Yil" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cQe-cx-7dZ"/>
-                            <constraint firstItem="647-jH-Yil" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hG4-aY-DcE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="ahu-0J-O0Z" secondAttribute="top" constant="-16" id="lsv-BD-TtN"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nrn-h9-pH0"/>
+                            <constraint firstItem="647-jH-Yil" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sPI-hU-qKA"/>
                             <constraint firstItem="zza-aF-RyO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vl5-dt-8dk"/>
                         </constraints>
                     </view>

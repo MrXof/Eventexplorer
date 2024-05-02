@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
     settingsPopup()
     addBorderForView()
   }
-  
+  //MARK: setting Header View and PopUp View
   func createCornerRadius() {
     headerView.layer.cornerRadius = 21
     headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
@@ -119,6 +119,21 @@ class MapViewController: UIViewController {
     priceView.layer.borderColor = borderColor.cgColor
   }
   
+  func settingsPopup() {
+    popUpView.backgroundColor = UIColor.white
+    popUpView.alpha = 0
+    popUpView.isHidden = true
+    
+    let attributs : [NSAttributedString.Key: Any] =
+    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
+      .foregroundColor: UIColor.white
+    ]
+    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
+    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
+    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
+    openDetailsButton.configuration?.contentInsets.leading = 0
+  }
+  
   //MARK: - Other settings
   
   func setupMapView() {
@@ -149,21 +164,6 @@ class MapViewController: UIViewController {
                      forAnnotationViewWithReuseIdentifier: String(describing: PinWithFriendAnnotationView.self))
     mapView.register(PinAnnotationView.self,
                      forAnnotationViewWithReuseIdentifier: String(describing: PinAnnotationView.self))
-  }
-  
-  func settingsPopup() {
-    popUpView.backgroundColor = UIColor.white
-    popUpView.alpha = 0
-    popUpView.isHidden = true
-    
-    let attributs : [NSAttributedString.Key: Any] = 
-    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
-      .foregroundColor: UIColor.white
-    ]
-    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
-    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
-    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
-    openDetailsButton.configuration?.contentInsets.leading = 0
   }
   
   //MARK: - Annotation and map settings
