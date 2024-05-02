@@ -230,7 +230,7 @@ class MapViewController: UIViewController {
   }
   
   func alertCommingSoon(){
-    let alert = UIAlertController(title: nil, message: "Comming Soon...", preferredStyle: .alert)
+    let alert = UIAlertController(title: nil, message: "Coming Soon…", preferredStyle: .alert)
     self.present(alert, animated: true, completion: nil)
     
     let duration: Double = 2.0
@@ -287,8 +287,9 @@ extension MapViewController: MKMapViewDelegate {
       UIView.animate(withDuration: 0.5) {
         self.popUpView.alpha = 1
         self.popUpView.isHidden = false
-        mapView.selectedAnnotations = []
+        self.popUpView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 245/255, alpha: 0.9)
       }
+    mapView.selectedAnnotations = []
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
     nameLabel.text = annotation.name

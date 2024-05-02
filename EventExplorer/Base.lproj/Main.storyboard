@@ -36,7 +36,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -48,7 +48,7 @@
                                         <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="downArrow" imagePlacement="trailing" title="Dnipro" imagePadding="7">
-                                            <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="baseForegroundColor" red="0.11372549830000001" green="0.13333332540000001" blue="0.1607843041" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="cahngeCityButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqD-EX-tf1"/>
@@ -66,7 +66,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.89411771299999998" green="0.89411771299999998" blue="0.89411771299999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0i3-cA-kFV"/>
                                             <constraint firstAttribute="bottom" secondItem="xxs-qO-0Wh" secondAttribute="bottom" id="6eH-3Z-cqf"/>
@@ -93,7 +93,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.89019608500000003" green="0.89411771299999998" blue="0.89019608500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="5ab-qG-A2r"/>
                                             <constraint firstAttribute="trailing" secondItem="gXj-Ac-KH5" secondAttribute="trailing" id="Dmq-vw-uvP"/>
@@ -283,7 +283,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-S9-vGU">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Keu-se-f4d">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="267"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -539,6 +539,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Open details">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" red="0.11372549830000001" green="0.13333332540000001" blue="0.1607843041" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </backgroundConfiguration>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <userDefinedRuntimeAttributes>
@@ -551,7 +554,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.96862745289999996" green="0.96862745289999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.96078431372549022" alpha="0.89773903145695366" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="8o7-pK-2Yy" firstAttribute="leading" secondItem="zza-aF-RyO" secondAttribute="leading" constant="16" id="4fO-Sj-OyB"/>
                                     <constraint firstItem="cZ0-xf-GtR" firstAttribute="top" secondItem="I3i-XX-h03" secondAttribute="bottom" constant="14" id="6XI-cf-f6L"/>
