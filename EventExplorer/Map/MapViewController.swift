@@ -36,6 +36,7 @@ class MapViewController: UIViewController {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
+  @IBOutlet weak var scrollView: UIScrollView!
   
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
@@ -132,6 +133,8 @@ class MapViewController: UIViewController {
     openDetailsButton.setAttributedTitle(attributedString, for: .normal)
     openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
     openDetailsButton.configuration?.contentInsets.leading = 0
+    
+    scrollView.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 16)
   }
   
   //MARK: - Other settings
@@ -149,7 +152,7 @@ class MapViewController: UIViewController {
     }
     locationManager.startUpdatingLocation()
     
-      mapView.overrideUserInterfaceStyle = .light
+    mapView.overrideUserInterfaceStyle = .light
   }
   
   func setupBindings() {
@@ -210,6 +213,33 @@ class MapViewController: UIViewController {
     }
   }
   
+  @IBAction func cahngeCityButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func exploreButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func filtersButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func openDetailsButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  func alertCommingSoon(){
+    let alert = UIAlertController(title: nil, message: "Comming Soon...", preferredStyle: .alert)
+    self.present(alert, animated: true, completion: nil)
+    
+    let duration: Double = 2.0
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+      alert.dismiss(animated: true, completion: nil)
+    }
+  }
+  
 }
 
 //MARK: - Extension
@@ -257,6 +287,7 @@ extension MapViewController: MKMapViewDelegate {
       UIView.animate(withDuration: 0.5) {
         self.popUpView.alpha = 1
         self.popUpView.isHidden = false
+        mapView.selectedAnnotations = []
       }
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
