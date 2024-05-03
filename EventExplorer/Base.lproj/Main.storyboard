@@ -36,7 +36,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -283,7 +283,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-S9-vGU">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Keu-se-f4d">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="267"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <gestureRecognizers/>
                                         </view>
@@ -599,6 +599,23 @@
                                     <outletCollection property="gestureRecognizers" destination="r2P-ke-oML" appends="YES" id="4mu-cS-Gbp"/>
                                 </connections>
                             </view>
+                            <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkG-IG-H8f">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Size 4_ Large" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-XO-6UK">
+                                        <rect key="frame" x="174.66666666666666" y="404" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="20I-x7-vCU"/>
+                                            <constraint firstAttribute="height" constant="44" id="ajS-nY-9li"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="cCZ-XO-6UK" firstAttribute="centerX" secondItem="AkG-IG-H8f" secondAttribute="centerX" id="vR0-jr-Qsn"/>
+                                    <constraint firstItem="cCZ-XO-6UK" firstAttribute="centerY" secondItem="AkG-IG-H8f" secondAttribute="centerY" id="zH4-PQ-acj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -606,11 +623,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="Irc-zh-RBz" secondAttribute="top" constant="-20" id="1De-Ry-4Cv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="647-jH-Yil" secondAttribute="trailing" id="24h-Lz-xDH"/>
                             <constraint firstAttribute="bottom" secondItem="zza-aF-RyO" secondAttribute="bottom" id="5Ug-Bg-Api"/>
+                            <constraint firstItem="AkG-IG-H8f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5kb-yE-LUq"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="80e-JZ-rDR"/>
                             <constraint firstItem="647-jH-Yil" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="LIP-Mf-4c5"/>
                             <constraint firstItem="647-jH-Yil" firstAttribute="top" secondItem="ZqI-Xb-PDM" secondAttribute="top" id="MC9-H8-91M"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N5S-Dm-uS9"/>
                             <constraint firstItem="zza-aF-RyO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Uph-ZP-fTL"/>
+                            <constraint firstItem="AkG-IG-H8f" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gdD-Dl-UcO"/>
+                            <constraint firstAttribute="bottom" secondItem="AkG-IG-H8f" secondAttribute="bottom" id="hYY-Dh-UEJ"/>
+                            <constraint firstItem="AkG-IG-H8f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jlq-71-4UR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="ahu-0J-O0Z" secondAttribute="top" constant="-16" id="lsv-BD-TtN"/>
                             <constraint firstItem="ZqI-Xb-PDM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nrn-h9-pH0"/>
                             <constraint firstItem="647-jH-Yil" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sPI-hU-qKA"/>
@@ -630,6 +651,8 @@
                         <outlet property="dateView" destination="YFc-Xb-2K2" id="Q4g-Ax-h6a"/>
                         <outlet property="headerView" destination="ZqI-Xb-PDM" id="gMp-Gv-mHb"/>
                         <outlet property="iconCategoryLabel" destination="M6v-ui-2oQ" id="PRy-rA-mQ6"/>
+                        <outlet property="loaderImage" destination="cCZ-XO-6UK" id="frg-qL-lvZ"/>
+                        <outlet property="loaderView" destination="AkG-IG-H8f" id="hQQ-bX-XGV"/>
                         <outlet property="locationButton" destination="ahu-0J-O0Z" id="ei9-A4-anj"/>
                         <outlet property="mapView" destination="647-jH-Yil" id="WWB-Yp-a6d"/>
                         <outlet property="nameLabel" destination="Qvg-9G-sza" id="tv6-Og-ssR"/>
@@ -656,6 +679,7 @@
     </scenes>
     <resources>
         <image name="Cancel button" width="28" height="28"/>
+        <image name="Size 4_ Large" width="44" height="44"/>
         <image name="downArrow" width="17" height="14"/>
         <image name="exploreButton" width="40" height="40"/>
         <image name="filterButton" width="40" height="40"/>
