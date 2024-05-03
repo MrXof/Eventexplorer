@@ -179,7 +179,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     }.store(in: &cancellables)
     
     module.$isLoading.sink { status in
-      self.loader(status)
+      self.setLoaderStatus(status)
     }.store(in: &cancellables)
   }
   
@@ -285,7 +285,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     }
   }
   
-  func loader(_ status: Bool) {
+  func setLoaderStatus(_ status: Bool) {
     if status {
       activityIndicator.startAnimating()
       loaderView.isHidden = false

@@ -10,9 +10,9 @@ import Foundation
 class MapModule {
   
   @Published var pinArray = [AirtableRecord<Pin>]()
-  var currentFilter = ObjectStore.shared.arrayCategories[0]
-  var allPins = [AirtableRecord<Pin>]()
   @Published var isLoading: Bool = false
+  private(set) var currentFilter = ObjectStore.shared.arrayCategories[0]
+  private(set) var allPins = [AirtableRecord<Pin>]()
   
   private func getPinData() {
     isLoading = true

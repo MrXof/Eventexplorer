@@ -31,12 +31,12 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-Xb-PDM">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="193.33333333333334"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="193.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="193.33333333333334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -109,7 +109,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 activities in the city" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjW-HD-6hw">
-                                        <rect key="frame" x="16" y="110.33333333333333" width="261" height="16"/>
+                                        <rect key="frame" x="16" y="106.33333333333333" width="261" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="6Vs-XV-teN"/>
                                         </constraints>
@@ -118,7 +118,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jF-JE-LBU">
-                                        <rect key="frame" x="0.0" y="144.33333333333334" width="393" height="34"/>
+                                        <rect key="frame" x="0.0" y="140.33333333333334" width="393" height="34"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lNp-ih-P2u">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
@@ -274,7 +274,7 @@
                                     <constraint firstAttribute="bottom" secondItem="2jF-JE-LBU" secondAttribute="bottom" constant="19" id="o3N-dr-93X"/>
                                     <constraint firstItem="cQ1-f0-ges" firstAttribute="top" secondItem="ZqI-Xb-PDM" secondAttribute="top" id="odW-UQ-LbY"/>
                                     <constraint firstItem="md5-aL-XXa" firstAttribute="leading" secondItem="Irc-zh-RBz" secondAttribute="trailing" constant="10" id="pVW-Qh-mkQ"/>
-                                    <constraint firstItem="RjW-HD-6hw" firstAttribute="top" secondItem="ahu-0J-O0Z" secondAttribute="bottom" constant="1" id="tw6-7V-0AX"/>
+                                    <constraint firstItem="RjW-HD-6hw" firstAttribute="top" secondItem="ahu-0J-O0Z" secondAttribute="bottom" constant="-3" id="tw6-7V-0AX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zza-aF-RyO">
