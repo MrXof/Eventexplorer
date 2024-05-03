@@ -218,10 +218,12 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
 
   @IBAction func cancelButton(_ sender: Any) {
-    UIView.animate(withDuration: 0.5) {
+    UIView.animate(withDuration: 0.5, animations: {
       self.popUpView.alpha = 0
+    }, completion: { _ in
       self.popUpView.isHidden = true
-    }
+    })
+
   }
   
   @IBAction func cahngeCityButton(_ sender: Any) {

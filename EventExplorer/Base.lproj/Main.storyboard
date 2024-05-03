@@ -551,7 +551,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="openDetailsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XVo-Kc-Caf"/>
+                                            <action selector="openDetailsButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zwH-ns-YGI"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wx0-RX-2CG">
@@ -647,7 +647,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="r2P-ke-oML">
                     <connections>
-                        <action selector="panGestureRecognizerPopUpView:" destination="BYZ-38-t0r" id="Yjg-Sr-lGp"/>
+                        <action selector="panGestureRecognizerPopUpViewWithSender:" destination="BYZ-38-t0r" id="qaj-a8-cmB"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
