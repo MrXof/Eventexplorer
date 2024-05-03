@@ -13,7 +13,7 @@ import Combine
 class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   //MapView @IBOutlet
   @IBOutlet weak var loaderView: UIView!
-  @IBOutlet weak var loaderImage: UIImageView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var headerView: UIView!
@@ -46,7 +46,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   let module = MapModule()
   var canUpdateMapCenter: Bool = true
   var countActivities = Int()
-  let loader = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
   
   var trayOriginalCenter: CGPoint!
   var trayDownOffset: CGFloat!
@@ -64,8 +63,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     settingsMap()
     settingsPopup()
     addBorderForView()
-    settingLoader()
-    startAnimation()
     pinchGestureRecognizer.delegate = self
     trayDownOffset = 160
     trayUp = popUpView.center
@@ -178,7 +175,11 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       self.addPointsToMap(array)
       self.countActivities = array.count
       self.countPeople.text = "\(self.countActivities) activities in the cuty"
-      self.stopAnimation()
+      print(self.module.isLoading)
+    }.store(in: &cancellables)
+    
+    module.$isLoading.sink { status in
+      self.loader(status)
     }.store(in: &cancellables)
   }
   
@@ -284,26 +285,14 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     }
   }
   
-  func settingLoader() {
-    self.present(loader, animated: true)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-      self.loader.dismiss(animated: true)
-    })
-  }
-  
-  func startAnimation() {
-    let rotation = CABasicAnimation(keyPath: "transform.rotation")
-    rotation.fromValue = 0
-    rotation.toValue = 2 * Double.pi
-    rotation.duration = 1.0
-    rotation.repeatCount = .infinity
-    loaderImage.layer.add(rotation, forKey: "spin")
-    loaderView.isHidden = false
-  }
-  
-  func stopAnimation() {
-    loaderImage.layer.removeAllAnimations()
-    loaderView.isHidden = true
+  func loader(_ status: Bool) {
+    if status {
+      activityIndicator.startAnimating()
+      loaderView.isHidden = false
+    } else {
+      activityIndicator.stopAnimating()
+      loaderView.isHidden = true
+    }
   }
   
 }

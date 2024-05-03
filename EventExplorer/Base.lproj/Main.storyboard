@@ -36,7 +36,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="197.33333333333334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -283,7 +283,7 @@
                                     <visualEffectView opaque="NO" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-S9-vGU">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Keu-se-f4d">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="267"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <gestureRecognizers/>
                                         </view>
@@ -602,18 +602,18 @@
                             <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AkG-IG-H8f">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Size 4_ Large" translatesAutoresizingMaskIntoConstraints="NO" id="cCZ-XO-6UK">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gqZ-l2-77G">
                                         <rect key="frame" x="174.66666666666666" y="404" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="20I-x7-vCU"/>
-                                            <constraint firstAttribute="height" constant="44" id="ajS-nY-9li"/>
+                                            <constraint firstAttribute="width" constant="44" id="C0c-qG-3ob"/>
+                                            <constraint firstAttribute="height" constant="44" id="dwJ-DP-g1z"/>
                                         </constraints>
-                                    </imageView>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="cCZ-XO-6UK" firstAttribute="centerX" secondItem="AkG-IG-H8f" secondAttribute="centerX" id="vR0-jr-Qsn"/>
-                                    <constraint firstItem="cCZ-XO-6UK" firstAttribute="centerY" secondItem="AkG-IG-H8f" secondAttribute="centerY" id="zH4-PQ-acj"/>
+                                    <constraint firstItem="gqZ-l2-77G" firstAttribute="centerX" secondItem="AkG-IG-H8f" secondAttribute="centerX" id="FMM-A6-iYy"/>
+                                    <constraint firstItem="gqZ-l2-77G" firstAttribute="centerY" secondItem="AkG-IG-H8f" secondAttribute="centerY" id="L0w-AL-KxC"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -639,6 +639,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="gqZ-l2-77G" id="Pph-hO-5SA"/>
                         <outlet property="addressLabel" destination="bax-bu-5vW" id="OMM-c2-lpV"/>
                         <outlet property="blurHeaderView" destination="cQ1-f0-ges" id="UfG-lj-JWo"/>
                         <outlet property="blurPopUpView" destination="Lyj-S9-vGU" id="qQj-bJ-8ZN"/>
@@ -651,7 +652,6 @@
                         <outlet property="dateView" destination="YFc-Xb-2K2" id="Q4g-Ax-h6a"/>
                         <outlet property="headerView" destination="ZqI-Xb-PDM" id="gMp-Gv-mHb"/>
                         <outlet property="iconCategoryLabel" destination="M6v-ui-2oQ" id="PRy-rA-mQ6"/>
-                        <outlet property="loaderImage" destination="cCZ-XO-6UK" id="frg-qL-lvZ"/>
                         <outlet property="loaderView" destination="AkG-IG-H8f" id="hQQ-bX-XGV"/>
                         <outlet property="locationButton" destination="ahu-0J-O0Z" id="ei9-A4-anj"/>
                         <outlet property="mapView" destination="647-jH-Yil" id="WWB-Yp-a6d"/>
@@ -679,7 +679,6 @@
     </scenes>
     <resources>
         <image name="Cancel button" width="28" height="28"/>
-        <image name="Size 4_ Large" width="44" height="44"/>
         <image name="downArrow" width="17" height="14"/>
         <image name="exploreButton" width="40" height="40"/>
         <image name="filterButton" width="40" height="40"/>
