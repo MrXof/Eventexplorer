@@ -12,6 +12,8 @@ import Combine
 
 class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   //MapView @IBOutlet
+  @IBOutlet weak var loaderView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
   @IBOutlet private weak var headerView: UIView!
@@ -173,6 +175,11 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       self.addPointsToMap(array)
       self.countActivities = array.count
       self.countPeople.text = "\(self.countActivities) activities in the cuty"
+      print(self.module.isLoading)
+    }.store(in: &cancellables)
+    
+    module.$isLoading.sink { status in
+      self.setLoaderStatus(status)
     }.store(in: &cancellables)
   }
   
@@ -275,6 +282,16 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
       alert.dismiss(animated: true, completion: nil)
+    }
+  }
+  
+  func setLoaderStatus(_ status: Bool) {
+    if status {
+      activityIndicator.startAnimating()
+      loaderView.isHidden = false
+    } else {
+      activityIndicator.stopAnimating()
+      loaderView.isHidden = true
     }
   }
   

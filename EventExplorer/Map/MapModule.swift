@@ -10,16 +10,19 @@ import Foundation
 class MapModule {
   
   @Published var pinArray = [AirtableRecord<Pin>]()
-  var currentFilter = ObjectStore.shared.arrayCategories[0]
-  var allPins = [AirtableRecord<Pin>]()
+  @Published var isLoading: Bool = false
+  private(set) var currentFilter = ObjectStore.shared.arrayCategories[0]
+  private(set) var allPins = [AirtableRecord<Pin>]()
   
   private func getPinData() {
+    isLoading = true
     NetworkManager.shared.getPinData { response in
       switch response {
       case .success(let pinTable):
         DispatchQueue.main.async {
           self.allPins.append(contentsOf: pinTable.records)
           self.updatePins()
+          self.isLoading = false
         }
       case .failure(let error):
         print(error)
