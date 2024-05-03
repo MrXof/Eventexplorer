@@ -110,11 +110,11 @@
 		E402EEC22BC53A1C00095E9C /* EventExplorer */ = {
 			isa = PBXGroup;
 			children = (
+				E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */,
 				E4E1DF072BD686F400E8B38A /* Map */,
 				E4E1DF002BD664B300E8B38A /* Views */,
 				E402EED72BC53AD300095E9C /* API */,
 				E402EED92BC53AE700095E9C /* Model */,
-				E402EED82BC53ADC00095E9C /* ViewController */,
 				E402EEC32BC53A1C00095E9C /* AppDelegate.swift */,
 				E402EEC52BC53A1C00095E9C /* SceneDelegate.swift */,
 				E402EEC92BC53A1C00095E9C /* Main.storyboard */,
@@ -135,18 +135,10 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		E402EED82BC53ADC00095E9C /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
-				E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		E402EED92BC53AE700095E9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E4D62FD02BD6E54B003B12B7 /* PinAnnotation.swift */,
 				E4A09C642BC67B4100FB08F8 /* Category.swift */,
 				E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */,
 			);
@@ -204,7 +196,7 @@
 		E4E1DF002BD664B300E8B38A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E4D62FD02BD6E54B003B12B7 /* PinAnnotation.swift */,
+				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -17,6 +17,7 @@ class PinWithFriendAnnotationView: MKAnnotationView {
   @IBOutlet weak var triangleView: UIView!
   @IBOutlet weak var labelFriendsIcon: UILabel!
   @IBOutlet weak var friendsIconView: UIView!
+  @IBOutlet weak var rectangleView: UIView!
   
   private let shapeLayer = CAShapeLayer()
   
@@ -37,6 +38,7 @@ class PinWithFriendAnnotationView: MKAnnotationView {
     
     drawTriangle(at: triangleView.frame.origin, with: triangleView.frame.size)
     triangleView.layer.bounds = shapeLayer.bounds
+    createShadowView()
   }
   
   private func drawTriangle(at origin: CGPoint, with size: CGSize) {
@@ -66,6 +68,28 @@ class PinWithFriendAnnotationView: MKAnnotationView {
     self.annotation = customAnnotation
   }
 
+  func createShadowView(
+    color: UIColor = .black,
+    alpha: Float = 0.25,
+    x: CGFloat = 0,
+    y: CGFloat = 4,
+    blur: CGFloat = 4,
+    spread: CGFloat = 0
+  )
+  {
+    triangleView.layer.shadowColor = color.cgColor
+    triangleView.layer.shadowOpacity = alpha
+    triangleView.layer.shadowOffset = CGSize(width: x, height: y)
+    triangleView.layer.shadowRadius = blur
+    triangleView.layer.shadowRadius += spread
+    
+    rectangleView.layer.shadowColor = color.cgColor
+    rectangleView.layer.shadowOpacity = alpha
+    rectangleView.layer.shadowOffset = CGSize(width: x, height: y)
+    rectangleView.layer.shadowRadius = blur
+    rectangleView.layer.shadowRadius += spread
+  }
+  
 }
 
 private extension PinWithFriendAnnotationView {

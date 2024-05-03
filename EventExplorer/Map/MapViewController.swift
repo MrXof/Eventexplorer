@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import Combine
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   //MapView @IBOutlet
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
@@ -36,11 +36,19 @@ class MapViewController: UIViewController {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
+  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet var pinchGestureRecognizer: UIPanGestureRecognizer!
   
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
   var canUpdateMapCenter: Bool = true
+  var countActivities = Int()
+  
+  var trayOriginalCenter: CGPoint!
+  var trayDownOffset: CGFloat!
+  var trayUp: CGPoint!
+  var trayDown: CGPoint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,8 +61,12 @@ class MapViewController: UIViewController {
     settingsMap()
     settingsPopup()
     addBorderForView()
+    pinchGestureRecognizer.delegate = self
+    trayDownOffset = 160
+    trayUp = popUpView.center
+    trayDown = CGPoint(x: popUpView.center.x ,y: popUpView.center.y + trayDownOffset)
   }
-  
+  //MARK: setting Header View and PopUp View
   func createCornerRadius() {
     headerView.layer.cornerRadius = 21
     headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
@@ -119,6 +131,24 @@ class MapViewController: UIViewController {
     priceView.layer.borderColor = borderColor.cgColor
   }
   
+  func settingsPopup() {
+    popUpView.backgroundColor = UIColor.white
+    popUpView.alpha = 0
+    popUpView.isHidden = true
+    
+    let attributs : [NSAttributedString.Key: Any] =
+    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
+      .foregroundColor: UIColor.white
+    ]
+    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
+    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
+    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
+    openDetailsButton.configuration?.contentInsets.leading = 0
+    
+    scrollView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    self.popUpView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 245/255, alpha: 0.9)
+  }
+  
   //MARK: - Other settings
   
   func setupMapView() {
@@ -134,13 +164,15 @@ class MapViewController: UIViewController {
     }
     locationManager.startUpdatingLocation()
     
-      mapView.overrideUserInterfaceStyle = .light
+    mapView.overrideUserInterfaceStyle = .light
   }
   
   func setupBindings() {
     module.$pinArray.sink { array in
       print(array)
       self.addPointsToMap(array)
+      self.countActivities = array.count
+      self.countPeople.text = "\(self.countActivities) activities in the cuty"
     }.store(in: &cancellables)
   }
   
@@ -149,21 +181,6 @@ class MapViewController: UIViewController {
                      forAnnotationViewWithReuseIdentifier: String(describing: PinWithFriendAnnotationView.self))
     mapView.register(PinAnnotationView.self,
                      forAnnotationViewWithReuseIdentifier: String(describing: PinAnnotationView.self))
-  }
-  
-  func settingsPopup() {
-    popUpView.backgroundColor = UIColor.white
-    popUpView.alpha = 0
-    popUpView.isHidden = true
-    
-    let attributs : [NSAttributedString.Key: Any] = 
-    [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
-      .foregroundColor: UIColor.white
-    ]
-    let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
-    openDetailsButton.setAttributedTitle(attributedString, for: .normal)
-    openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
-    openDetailsButton.configuration?.contentInsets.leading = 0
   }
   
   //MARK: - Annotation and map settings
@@ -204,9 +221,60 @@ class MapViewController: UIViewController {
   }
 
   @IBAction func cancelButton(_ sender: Any) {
-    UIView.animate(withDuration: 0.5) {
+    UIView.animate(withDuration: 0.15, animations: {
       self.popUpView.alpha = 0
+    }, completion: { _ in
       self.popUpView.isHidden = true
+    })
+
+  }
+  
+  @IBAction func cahngeCityButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func exploreButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func filtersButton(_ sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func openDetailsButton(sender: Any) {
+    alertCommingSoon()
+  }
+  
+  @IBAction func panGestureRecognizerPopUpView(sender: UIPanGestureRecognizer) {
+    let translation = sender.translation(in: popUpView)
+    
+    if sender.state == .began {
+      self.trayOriginalCenter = popUpView.center
+    } else if sender.state == .changed {
+      popUpView.center = CGPoint(x: trayOriginalCenter.x, y: trayOriginalCenter.y + translation.y)
+    } else if sender.state == .ended {
+      let velocity = sender.velocity(in: popUpView)
+      
+      if velocity.y > 0 {
+        UIView.animate(withDuration: 0.3) {
+          self.popUpView.center = self.trayDown
+        }
+      } else {
+        UIView.animate(withDuration: 0.3) {
+          self.popUpView.center = self.trayUp
+        }
+      }
+    }
+  }
+  
+  func alertCommingSoon(){
+    let alert = UIAlertController(title: nil, message: "Coming Soon…", preferredStyle: .alert)
+    self.present(alert, animated: true, completion: nil)
+    
+    let duration: Double = 2.0
+    
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+      alert.dismiss(animated: true, completion: nil)
     }
   }
   
@@ -254,10 +322,11 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      UIView.animate(withDuration: 0.5) {
+      UIView.animate(withDuration: 0.15) {
         self.popUpView.alpha = 1
         self.popUpView.isHidden = false
       }
+    mapView.selectedAnnotations = []
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
     nameLabel.text = annotation.name
@@ -268,7 +337,6 @@ extension MapViewController: MKMapViewDelegate {
     priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
-
     let dateFormatterDate = DateFormatter()
     dateFormatterDate.dateFormat = "MMMM d"
     

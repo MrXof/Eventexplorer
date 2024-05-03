@@ -16,6 +16,7 @@
             <connections>
                 <outlet property="labelIcon" destination="0jh-QP-TYk" id="MeZ-a5-mcC"/>
                 <outlet property="labelUsersGoing" destination="nst-0o-C5N" id="XfY-c3-s9F"/>
+                <outlet property="rectangleView" destination="GAf-zk-2jD" id="GqF-H4-rGw"/>
                 <outlet property="triangleView" destination="T1w-vv-YQZ" id="ihk-E0-bce"/>
             </connections>
         </placeholder>
