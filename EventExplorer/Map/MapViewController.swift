@@ -145,7 +145,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     openDetailsButton.configuration = openDetailsButton.configuration ?? .plain()
     openDetailsButton.configuration?.contentInsets.leading = 0
     
-    scrollView.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 16)
+    scrollView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    self.popUpView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 245/255, alpha: 0.9)
   }
   
   //MARK: - Other settings
@@ -170,6 +171,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     module.$pinArray.sink { array in
       print(array)
       self.addPointsToMap(array)
+      self.countActivities = array.count
+      self.countPeople.text = "\(self.countActivities) activities in the cuty"
     }.store(in: &cancellables)
   }
   
@@ -218,7 +221,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
 
   @IBAction func cancelButton(_ sender: Any) {
-    UIView.animate(withDuration: 0.5, animations: {
+    UIView.animate(withDuration: 0.15, animations: {
       self.popUpView.alpha = 0
     }, completion: { _ in
       self.popUpView.isHidden = true
@@ -305,8 +308,6 @@ extension MapViewController: MKMapViewDelegate {
       let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
       annotationViewEventSecondPoint?.display(annotation)
       
-      //{TODO: доробити
-//      countPeople.text = "\(countActivities) activities in the cuty"
       return annotationViewEventSecondPoint
     } else {
       
@@ -321,10 +322,9 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      UIView.animate(withDuration: 0.5) {
+      UIView.animate(withDuration: 0.15) {
         self.popUpView.alpha = 1
         self.popUpView.isHidden = false
-        self.popUpView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 245/255, alpha: 0.9)
       }
     mapView.selectedAnnotations = []
     guard let annotation = view.annotation as? PinAnnotation else { return }
@@ -337,7 +337,6 @@ extension MapViewController: MKMapViewDelegate {
     priceLabel.text = annotation.priceTier.title()
     
     //changeDateFormat
-
     let dateFormatterDate = DateFormatter()
     dateFormatterDate.dateFormat = "MMMM d"
     

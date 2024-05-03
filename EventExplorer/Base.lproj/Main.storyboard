@@ -235,8 +235,8 @@
                                                             <outlet property="iconLabelView" destination="e3L-rZ-mTp" id="7FY-Ie-8VV"/>
                                                             <outlet property="iconeViewCell" destination="KVF-fw-UX4" id="VKS-D6-WqB"/>
                                                             <outlet property="labelCategories" destination="pPH-7i-hRG" id="BC4-FC-cCz"/>
-                                                            <outlet property="lhs" destination="rti-Rb-agu" id="fRR-x6-22r"/>
-                                                            <outlet property="rhs" destination="hkw-HI-28o" id="YXT-bs-7qK"/>
+                                                            <outlet property="leadingView" destination="rti-Rb-agu" id="W2M-bs-sHx"/>
+                                                            <outlet property="trailingView" destination="hkw-HI-28o" id="Kbk-Ll-yny"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
