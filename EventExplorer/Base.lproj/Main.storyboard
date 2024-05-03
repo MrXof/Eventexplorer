@@ -285,6 +285,7 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Keu-se-f4d">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="266.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <gestureRecognizers/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <blurEffect style="light"/>
@@ -553,6 +554,19 @@
                                             <action selector="openDetailsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XVo-Kc-Caf"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wx0-RX-2CG">
+                                        <rect key="frame" x="177" y="7" width="39" height="5"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.89411771299999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="aoG-H5-koN"/>
+                                            <constraint firstAttribute="width" constant="39" id="pPh-y5-PpB"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                                <real key="value" value="3.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.96078431372549022" alpha="0.89773903145695366" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -574,11 +588,16 @@
                                     <constraint firstItem="I3i-XX-h03" firstAttribute="top" secondItem="Qvg-9G-sza" secondAttribute="bottom" constant="3" id="g8z-Tp-grb"/>
                                     <constraint firstItem="7I5-8x-7gS" firstAttribute="top" secondItem="zza-aF-RyO" secondAttribute="top" constant="21" id="mGX-Ea-P9W"/>
                                     <constraint firstAttribute="trailing" secondItem="Lyj-S9-vGU" secondAttribute="trailing" id="odK-uK-6i6"/>
+                                    <constraint firstItem="Wx0-RX-2CG" firstAttribute="centerX" secondItem="zza-aF-RyO" secondAttribute="centerX" id="phx-03-Bbz"/>
                                     <constraint firstAttribute="trailing" secondItem="I3i-XX-h03" secondAttribute="trailing" constant="65" id="r2p-h9-Vsi"/>
                                     <constraint firstAttribute="trailing" secondItem="8o7-pK-2Yy" secondAttribute="trailing" constant="16" id="tKw-ff-tkL"/>
                                     <constraint firstItem="e2c-gK-AMY" firstAttribute="leading" secondItem="zza-aF-RyO" secondAttribute="leading" id="tXv-fw-TkR"/>
                                     <constraint firstItem="e2c-gK-AMY" firstAttribute="top" secondItem="cZ0-xf-GtR" secondAttribute="bottom" constant="16" id="thQ-mx-sZZ"/>
+                                    <constraint firstItem="Wx0-RX-2CG" firstAttribute="top" secondItem="zza-aF-RyO" secondAttribute="top" constant="7" id="vkK-ek-2lI"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="r2P-ke-oML" appends="YES" id="4mu-cS-Gbp"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -615,7 +634,8 @@
                         <outlet property="mapView" destination="647-jH-Yil" id="WWB-Yp-a6d"/>
                         <outlet property="nameLabel" destination="Qvg-9G-sza" id="tv6-Og-ssR"/>
                         <outlet property="openDetailsButton" destination="8o7-pK-2Yy" id="lh5-dY-e1I"/>
-                        <outlet property="popUpView" destination="zza-aF-RyO" id="tcF-Fy-qr1"/>
+                        <outlet property="pinchGestureRecognizer" destination="r2P-ke-oML" id="Alr-qF-OHM"/>
+                        <outlet property="popUpView" destination="zza-aF-RyO" id="GES-NH-eFg"/>
                         <outlet property="priceLabel" destination="cjs-tc-8mi" id="Nwf-xd-kdf"/>
                         <outlet property="priceView" destination="527-TL-amN" id="IOo-zk-fjI"/>
                         <outlet property="scrollView" destination="7Yq-UP-SxG" id="zcB-SQ-Qio"/>
@@ -625,6 +645,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="r2P-ke-oML">
+                    <connections>
+                        <action selector="panGestureRecognizerPopUpView:" destination="BYZ-38-t0r" id="Yjg-Sr-lGp"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-27.464788732394368"/>
         </scene>

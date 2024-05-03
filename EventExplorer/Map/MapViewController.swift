@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 import Combine
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   //MapView @IBOutlet
   @IBOutlet private weak var locationButton: UIButton!
   @IBOutlet private weak var collectionView: UICollectionView!
@@ -37,11 +37,18 @@ class MapViewController: UIViewController {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var priceLabel: UILabel!
   @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet var pinchGestureRecognizer: UIPanGestureRecognizer!
   
   let locationManager = CLLocationManager()
   var cancellables = [AnyCancellable]()
   let module = MapModule()
   var canUpdateMapCenter: Bool = true
+  var countActivities = Int()
+  
+  var trayOriginalCenter: CGPoint!
+  var trayDownOffset: CGFloat!
+  var trayUp: CGPoint!
+  var trayDown: CGPoint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,6 +61,10 @@ class MapViewController: UIViewController {
     settingsMap()
     settingsPopup()
     addBorderForView()
+    pinchGestureRecognizer.delegate = self
+    trayDownOffset = 160
+    trayUp = popUpView.center
+    trayDown = CGPoint(x: popUpView.center.x ,y: popUpView.center.y + trayDownOffset)
   }
   //MARK: setting Header View and PopUp View
   func createCornerRadius() {
@@ -225,8 +236,30 @@ class MapViewController: UIViewController {
     alertCommingSoon()
   }
   
-  @IBAction func openDetailsButton(_ sender: Any) {
+  @IBAction func openDetailsButton(sender: Any) {
     alertCommingSoon()
+  }
+  
+  @IBAction func panGestureRecognizerPopUpView(sender: UIPanGestureRecognizer) {
+    let translation = sender.translation(in: popUpView)
+    
+    if sender.state == .began {
+      self.trayOriginalCenter = popUpView.center
+    } else if sender.state == .changed {
+      popUpView.center = CGPoint(x: trayOriginalCenter.x, y: trayOriginalCenter.y + translation.y)
+    } else if sender.state == .ended {
+      let velocity = sender.velocity(in: popUpView)
+      
+      if velocity.y > 0 {
+        UIView.animate(withDuration: 0.3) {
+          self.popUpView.center = self.trayDown
+        }
+      } else {
+        UIView.animate(withDuration: 0.3) {
+          self.popUpView.center = self.trayUp
+        }
+      }
+    }
   }
   
   func alertCommingSoon(){
@@ -270,6 +303,8 @@ extension MapViewController: MKMapViewDelegate {
       let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
       annotationViewEventSecondPoint?.display(annotation)
       
+      //{TODO: доробити
+//      countPeople.text = "\(countActivities) activities in the cuty"
       return annotationViewEventSecondPoint
     } else {
       
