@@ -220,7 +220,6 @@
 				E402EEBC2BC53A1C00095E9C /* Sources */,
 				E402EEBD2BC53A1C00095E9C /* Frameworks */,
 				E402EEBE2BC53A1C00095E9C /* Resources */,
-				E40477762BD002E400A467C8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -299,27 +298,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E40477762BD002E400A467C8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E402EEBC2BC53A1C00095E9C /* Sources */ = {
@@ -489,7 +467,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6N7NB3R7;
+				DEVELOPMENT_TEAM = G355VXTWJ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EventExplorer/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to the location will allow to show events in your region";
@@ -503,7 +481,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Danill.TZ;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.molfar.event-explorer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -518,7 +496,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8J6N7NB3R7;
+				DEVELOPMENT_TEAM = G355VXTWJ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EventExplorer/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to the location will allow to show events in your region";
@@ -532,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Danill.TZ;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.molfar.event-explorer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

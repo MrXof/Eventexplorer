@@ -38,6 +38,9 @@ class PinAnnotationView: MKAnnotationView {
     drawTriangle(at: triangleView.frame.origin, with: triangleView.frame.size)
     triangleView.layer.bounds = shapeLayer.bounds
     createShadowView()
+    
+    let annotationViewHeight = view.frame.height
+    centerOffset = CGPoint(x: 0.0, y: -annotationViewHeight/2)
   }
   
   private func drawTriangle(at origin: CGPoint, with size: CGSize) {
@@ -61,6 +64,9 @@ class PinAnnotationView: MKAnnotationView {
     labelUsersGoing.text = "\(customAnnotation.usersGoing)"
     labelIcon.text = friendsIcon
     self.annotation = customAnnotation
+    
+//    let annotationViewHeight = frame.height
+//    centerOffset = CGPoint(x: 0.0, y: -annotationViewHeight/2)
   }
   
   private func nibInstantiate(autoResizingMask: UIView.AutoresizingMask = []) -> UIView {
