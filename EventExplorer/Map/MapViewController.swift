@@ -135,9 +135,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   
   func settingsPopup() {
     popUpView.backgroundColor = UIColor.white
-    popUpView.alpha = 0
-    popUpView.isHidden = true
-    
+    hidePopView(animated: false)
     let attributs : [NSAttributedString.Key: Any] =
     [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
       .foregroundColor: UIColor.white
@@ -228,12 +226,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
 
   @IBAction func cancelButton(_ sender: Any) {
-    UIView.animate(withDuration: 0.15, animations: {
-      self.popUpView.alpha = 0
-    }, completion: { _ in
-      self.popUpView.isHidden = true
-    })
-
+    hidePopView()
   }
   
   @IBAction func cahngeCityButton(_ sender: Any) {
@@ -258,20 +251,30 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     if sender.state == .began {
       self.trayOriginalCenter = popUpView.center
     } else if sender.state == .changed {
-      popUpView.center = CGPoint(x: trayOriginalCenter.x, y: trayOriginalCenter.y + translation.y)
+      if translation.y > 0 {
+        popUpView.transform = CGAffineTransform(translationX: 0, y: translation.y)
+      }
     } else if sender.state == .ended {
       let velocity = sender.velocity(in: popUpView)
       
       if velocity.y > 0 {
-        UIView.animate(withDuration: 0.3) {
-          self.popUpView.center = self.trayDown
-        }
+        self.hidePopView()
       } else {
-        UIView.animate(withDuration: 0.3) {
-          self.popUpView.center = self.trayUp
-        }
+        self.showPopView()
       }
     }
+  }
+  
+  func showPopView() {
+    UIView.animate(withDuration: 0.15) {
+      self.popUpView.transform = CGAffineTransform(translationX: 0, y: 0)
+    }
+  }
+  
+  func hidePopView(animated: Bool = true) {
+    UIView.animate(withDuration: animated ? 0.15 : 0.0, animations: {
+      self.popUpView.transform = CGAffineTransform(translationX: 0, y: self.popUpView.bounds.height)
+    })
   }
   
   func alertCommingSoon(){
@@ -324,7 +327,6 @@ extension MapViewController: MKMapViewDelegate {
     if !customAnnotation.friendsAreGoing {
       let annotationViewEventSecondPoint = mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: PinAnnotationView.self)) as? PinAnnotationView
       annotationViewEventSecondPoint?.display(annotation)
-      
       return annotationViewEventSecondPoint
     } else {
       
@@ -339,10 +341,7 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      UIView.animate(withDuration: 0.15) {
-        self.popUpView.alpha = 1
-        self.popUpView.isHidden = false
-      }
+    showPopView()
     mapView.selectedAnnotations = []
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
