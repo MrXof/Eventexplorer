@@ -47,7 +47,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   var canUpdateMapCenter: Bool = true
   var countActivities = Int()
   var arrayPoints: [PinAnnotation] = []
-  var previoysRegion: MKCoordinateRegion?
+  var previousRegion: MKCoordinateRegion?
   
   var trayOriginalCenter: CGPoint!
   var trayDownOffset: CGFloat!
@@ -245,13 +245,13 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     alertCommingSoon()
   }
   
-  func savePreviousregion() {
-    previoysRegion = mapView.region
+  func savePreviousRegion() {
+    previousRegion = mapView.region
   }
   
   func restorePreviousRegion() {
-    if let previoysRegion = previoysRegion {
-      mapView.setRegion(previoysRegion, animated: true)
+    if let previousRegion = previousRegion {
+      mapView.setRegion(previousRegion, animated: true)
     }
   }
   
@@ -356,7 +356,7 @@ extension MapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     showPopView()
-    savePreviousregion()
+    savePreviousRegion()
     mapView.removeAnnotations(mapView.annotations.filter {$0 !== view.annotation })
     mapView.selectedAnnotations = [view.annotation].compactMap({$0})
     guard let annotation = view.annotation as? PinAnnotation else { return }
@@ -379,12 +379,6 @@ extension MapViewController: MKMapViewDelegate {
     let timePart = dateFormatterTime.string(from: annotation.date)
     self.dateLabel.text = datePart
     self.timeLabel.text = timePart
-    if let pinAnnotation = view as? PinAnnotationView {
-      pinAnnotation.pinSelected(true)
-    }
-    if let pinFriendsAnnotation = view as? PinWithFriendAnnotationView {
-      pinFriendsAnnotation.pinSelected(true)
-    }
     
     let radius: CLLocationDistance = 2000
     let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
