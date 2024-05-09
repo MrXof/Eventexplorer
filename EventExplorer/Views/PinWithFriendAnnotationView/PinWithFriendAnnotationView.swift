@@ -53,10 +53,6 @@ class PinWithFriendAnnotationView: MKAnnotationView {
     
   }
   
-  func pinSelected(_ status: Bool) {
-    elipseView.isHidden = !status
-  }
-  
   override func setSelected(_ selected: Bool, animated: Bool) {
     elipseView.isHidden = !selected
   }
