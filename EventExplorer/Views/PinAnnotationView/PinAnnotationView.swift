@@ -1,8 +1,8 @@
 //
-//  PinWithFriendAnnotationView.swift
+//  PinAnnotationView.swift
 //  EventExplorer
 //
-//  Created by Даниил Чугуевский on 23.04.2024.
+//  Created by Даниил Чугуевский on 24.04.2024.
 //
 
 import Foundation
@@ -10,13 +10,14 @@ import UIKit
 import MapKit
 import SDWebImage
 
-class PinWithFriendAnnotationView: MKAnnotationView {
+class PinAnnotationView: MKAnnotationView {
   
-  @IBOutlet weak var pinImage: UIImageView!
-  @IBOutlet weak var labelFriendsIcon: UILabel!
+  @IBOutlet weak var labelIcon: UILabel!
+  @IBOutlet weak var elipseView: UIView!
+  @IBOutlet weak var labelUsersGoing: UILabel!
   
-  private let shapeLayer = CAShapeLayer()
-  
+  var shapeLayer = CAShapeLayer()
+
   override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
     super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
     
@@ -29,39 +30,43 @@ class PinWithFriendAnnotationView: MKAnnotationView {
   
   private func setup() {
     let view = self.nibInstantiate(autoResizingMask: [.flexibleHeight, .flexibleWidth])
+
     self.frame = view.frame
     addSubview(view)
     
     let annotationViewHeight = view.frame.height
     centerOffset = CGPoint(x: 0.0, y: -annotationViewHeight/2)
+    elipseView.isHidden = true
   }
   
   func display(_ annotation: MKAnnotation) {
     guard let customAnnotation = annotation as? PinAnnotation,
-          let friendsIcon = customAnnotation.icon,
-          let urlString = customAnnotation.image,
-          let friendAvatarURL = URL(string: urlString) else { return }
+          let friendsIcon = customAnnotation.icon else { return }
     
-    pinImage.sd_setImage(with: friendAvatarURL)
-    
-    labelFriendsIcon.text = friendsIcon
+    labelUsersGoing.text = "\(customAnnotation.usersGoing)"
+    labelIcon.text = friendsIcon
     self.annotation = customAnnotation
     
     let annotationViewHeight = frame.height
     centerOffset = CGPoint(x: 0.0, y: -annotationViewHeight/2)
-    
   }
   
-}
-
-private extension PinWithFriendAnnotationView {
-  
-  func nibInstantiate(autoResizingMask: UIView.AutoresizingMask = []) -> UIView {
-    let bundle = Bundle(for: Self.self)
-    let nib = bundle.loadNibNamed(String(describing: Self.self), owner: self, options: nil)
+  private func nibInstantiate(autoResizingMask: UIView.AutoresizingMask = []) -> UIView {
+    let bundle = Bundle(for: type(of: self))
+    let nib = bundle.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)
     let view = nib?.first as! UIView
     view.autoresizingMask = autoResizingMask
     return view
   }
   
+  func pinSelected(_ status: Bool) {
+    elipseView.isHidden = !status
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    elipseView.isHidden = !selected
+    
+  }
+  
 }
+

@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
             <connections>
+                <outlet property="elipseView" destination="gIL-he-4l5" id="vLn-fp-f1J"/>
                 <outlet property="labelFriendsIcon" destination="Ym7-nD-ddn" id="mSL-Vn-GjC"/>
                 <outlet property="pinImage" destination="9ez-24-PlI" id="R0J-zS-heP"/>
             </connections>

@@ -110,7 +110,8 @@
 		E402EEC22BC53A1C00095E9C /* EventExplorer */ = {
 			isa = PBXGroup;
 			children = (
-				E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */,
+				E420BEBF2BEBE8D000D553C8 /* Resources */,
+				E420BEBE2BEBE8B900D553C8 /* Services */,
 				E4E1DF072BD686F400E8B38A /* Map */,
 				E4E1DF002BD664B300E8B38A /* Views */,
 				E402EED72BC53AD300095E9C /* API */,
@@ -119,9 +120,6 @@
 				E402EEC52BC53A1C00095E9C /* SceneDelegate.swift */,
 				E402EEC92BC53A1C00095E9C /* Main.storyboard */,
 				E402EECE2BC53A1E00095E9C /* LaunchScreen.storyboard */,
-				E402EED12BC53A1E00095E9C /* Info.plist */,
-				E4A09C682BC6A2E000FB08F8 /* Font */,
-				E402EEE12BC5629E00095E9C /* Assets.xcassets */,
 			);
 			path = EventExplorer;
 			sourceTree = "<group>";
@@ -138,11 +136,44 @@
 		E402EED92BC53AE700095E9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4D62FD02BD6E54B003B12B7 /* PinAnnotation.swift */,
-				E4A09C642BC67B4100FB08F8 /* Category.swift */,
-				E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */,
+				E420BEBD2BEBE85400D553C8 /* Pin */,
+				E420BEBC2BEBE84F00D553C8 /* AirtableResponse */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E420BEBC2BEBE84F00D553C8 /* AirtableResponse */ = {
+			isa = PBXGroup;
+			children = (
+				E4A09C642BC67B4100FB08F8 /* Category.swift */,
+			);
+			path = AirtableResponse;
+			sourceTree = "<group>";
+		};
+		E420BEBD2BEBE85400D553C8 /* Pin */ = {
+			isa = PBXGroup;
+			children = (
+				E4D62FD02BD6E54B003B12B7 /* PinAnnotation.swift */,
+			);
+			path = Pin;
+			sourceTree = "<group>";
+		};
+		E420BEBE2BEBE8B900D553C8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E4A09C662BC67EC600FB08F8 /* ObjectStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E420BEBF2BEBE8D000D553C8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E402EED12BC53A1E00095E9C /* Info.plist */,
+				E4A09C682BC6A2E000FB08F8 /* Font */,
+				E402EEE12BC5629E00095E9C /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E442B9442BD9612600E68C69 /* PinWithFriendAnnotationView */ = {
@@ -184,18 +215,11 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		E4DBE1DE2BD7BBE400F25CAE /* Custom Annotation View */ = {
+		E4E1DF002BD664B300E8B38A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E442B9442BD9612600E68C69 /* PinWithFriendAnnotationView */,
 				E442B9452BD9613B00E68C69 /* PinAnnotationView */,
-			);
-			path = "Custom Annotation View";
-			sourceTree = "<group>";
-		};
-		E4E1DF002BD664B300E8B38A /* Views */ = {
-			isa = PBXGroup;
-			children = (
 				E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */,
 			);
 			path = Views;
@@ -469,7 +493,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G355VXTWJ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EventExplorer/Info.plist;
+				INFOPLIST_FILE = EventExplorer/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to the location will allow to show events in your region";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -498,7 +522,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G355VXTWJ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EventExplorer/Info.plist;
+				INFOPLIST_FILE = EventExplorer/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to the location will allow to show events in your region";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
