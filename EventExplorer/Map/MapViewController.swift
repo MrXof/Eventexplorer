@@ -46,6 +46,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   let module = MapModule()
   var canUpdateMapCenter: Bool = true
   var countActivities = Int()
+  var arrayPoints: [PinAnnotation] = []
+  var previoysRegion: MKCoordinateRegion?
   
   var trayOriginalCenter: CGPoint!
   var trayDownOffset: CGFloat!
@@ -54,7 +56,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-  
+    
     createShadowView()
     createCornerRadius()
     configureLocationButton()
@@ -138,7 +140,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     hidePopView(animated: false)
     let attributs : [NSAttributedString.Key: Any] =
     [.font: UIFont(name: "RedHatDisplay-Bold", size: 16)!,
-      .foregroundColor: UIColor.white
+     .foregroundColor: UIColor.white
     ]
     let attributedString = NSAttributedString(string: "Open details", attributes: attributs)
     openDetailsButton.setAttributedTitle(attributedString, for: .normal)
@@ -172,7 +174,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       print(array)
       self.addPointsToMap(array)
       self.countActivities = array.count
-      self.countPeople.text = "\(self.countActivities) activities in the cuty"
+      self.countPeople.text = "\(self.countActivities) activities in the city"
       print(self.module.isLoading)
     }.store(in: &cancellables)
     
@@ -199,8 +201,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   func generateAnnotations(from points: [AirtableRecord<Pin>]) -> [PinAnnotation] {
-    var arrayPoints: [PinAnnotation] = []
-    
     guard !points.isEmpty else {
       return arrayPoints
     }
@@ -224,7 +224,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     
     return arrayPoints
   }
-
+  
   @IBAction func cancelButton(_ sender: Any) {
     hidePopView()
   }
@@ -243,6 +243,16 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   
   @IBAction func openDetailsButton(sender: Any) {
     alertCommingSoon()
+  }
+  
+  func savePreviousregion() {
+    previoysRegion = mapView.region
+  }
+  
+  func restorePreviousRegion() {
+    if let previoysRegion = previoysRegion {
+      mapView.setRegion(previoysRegion, animated: true)
+    }
   }
   
   @IBAction func panGestureRecognizerPopUpView(sender: UIPanGestureRecognizer) {
@@ -276,6 +286,9 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       self.popUpView.transform = CGAffineTransform(translationX: 0, y: self.popUpView.bounds.height)
     })
     self.mapView.selectedAnnotations = []
+    let annotations: [MKAnnotation] = self.arrayPoints.compactMap { $0 }
+    self.mapView.addAnnotations(annotations)
+    restorePreviousRegion()
   }
   
   func alertCommingSoon(){
@@ -343,6 +356,8 @@ extension MapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     showPopView()
+    savePreviousregion()
+    mapView.removeAnnotations(mapView.annotations.filter {$0 !== view.annotation })
     mapView.selectedAnnotations = [view.annotation].compactMap({$0})
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
@@ -370,6 +385,10 @@ extension MapViewController: MKMapViewDelegate {
     if let pinFriendsAnnotation = view as? PinWithFriendAnnotationView {
       pinFriendsAnnotation.pinSelected(true)
     }
+    
+    let radius: CLLocationDistance = 2000
+    let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
+    mapView.setRegion(region, animated: true)
   }
   
 }
