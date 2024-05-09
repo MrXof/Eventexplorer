@@ -275,6 +275,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     UIView.animate(withDuration: animated ? 0.15 : 0.0, animations: {
       self.popUpView.transform = CGAffineTransform(translationX: 0, y: self.popUpView.bounds.height)
     })
+    self.mapView.selectedAnnotations = []
   }
   
   func alertCommingSoon(){
@@ -342,7 +343,7 @@ extension MapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     showPopView()
-    mapView.selectedAnnotations = []
+    mapView.selectedAnnotations = [view.annotation].compactMap({$0})
     guard let annotation = view.annotation as? PinAnnotation else { return }
     
     nameLabel.text = annotation.name
@@ -363,8 +364,14 @@ extension MapViewController: MKMapViewDelegate {
     let timePart = dateFormatterTime.string(from: annotation.date)
     self.dateLabel.text = datePart
     self.timeLabel.text = timePart
+    if let pinAnnotation = view as? PinAnnotationView {
+      pinAnnotation.pinSelected(true)
+    }
+    if let pinFriendsAnnotation = view as? PinWithFriendAnnotationView {
+      pinFriendsAnnotation.pinSelected(true)
+    }
   }
-
+  
 }
 
 extension MapViewController: UICollectionViewDelegate {
