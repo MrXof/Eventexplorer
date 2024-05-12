@@ -14,6 +14,7 @@
 		E402EED02BC53A1E00095E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E402EECE2BC53A1E00095E9C /* LaunchScreen.storyboard */; };
 		E402EEE22BC5629E00095E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E402EEE12BC5629E00095E9C /* Assets.xcassets */; };
 		E402EEE42BC5757C00095E9C /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */; };
+		E428A9B12BEE867A009FEF25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E428A9B02BEE867A009FEF25 /* Localizable.xcstrings */; };
 		E442B9372BD90C3B00E68C69 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E442B9362BD90C3B00E68C69 /* SDWebImage */; };
 		E442B9392BD90C3B00E68C69 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E442B9382BD90C3B00E68C69 /* SDWebImageMapKit */; };
 		E442B93D2BD929CA00E68C69 /* PinWithFriendAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E442B93C2BD929CA00E68C69 /* PinWithFriendAnnotationView.xib */; };
@@ -52,6 +53,7 @@
 		E402EED12BC53A1E00095E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E402EEE12BC5629E00095E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E402EEE32BC5757C00095E9C /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		E428A9B02BEE867A009FEF25 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E442B93C2BD929CA00E68C69 /* PinWithFriendAnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinWithFriendAnnotationView.xib; sourceTree = "<group>"; };
 		E442B9402BD95B4600E68C69 /* PinAnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinAnnotationView.xib; sourceTree = "<group>"; };
 		E442B9422BD9611400E68C69 /* PinAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotationView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		E402EEC22BC53A1C00095E9C /* EventExplorer */ = {
 			isa = PBXGroup;
 			children = (
+				E4813EFE2BED5DC700E71B00 /* Localizable */,
 				E4A09C682BC6A2E000FB08F8 /* Font */,
 				E420BEBF2BEBE8D000D553C8 /* Resources */,
 				E420BEBE2BEBE8B900D553C8 /* Services */,
@@ -192,6 +195,14 @@
 				E442B9422BD9611400E68C69 /* PinAnnotationView.swift */,
 			);
 			path = PinAnnotationView;
+			sourceTree = "<group>";
+		};
+		E4813EFE2BED5DC700E71B00 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				E428A9B02BEE867A009FEF25 /* Localizable.xcstrings */,
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 		E4A09C682BC6A2E000FB08F8 /* Font */ = {
@@ -280,6 +291,7 @@
 			knownRegions = (
 				en,
 				Base,
+				uk,
 			);
 			mainGroup = E402EEB72BC53A1C00095E9C;
 			packageReferences = (
@@ -304,6 +316,7 @@
 				E4E456662BED137900F5E492 /* RedHatDisplay-Italic.ttf in Resources */,
 				E4E456672BED137900F5E492 /* RedHatDisplay-Bold.ttf in Resources */,
 				E442B93D2BD929CA00E68C69 /* PinWithFriendAnnotationView.xib in Resources */,
+				E428A9B12BEE867A009FEF25 /* Localizable.xcstrings in Resources */,
 				E4E4566A2BED137900F5E492 /* RedHatDisplay-ExtraBold.ttf in Resources */,
 				E402EECB2BC53A1C00095E9C /* Main.storyboard in Resources */,
 				E4E456692BED137900F5E492 /* RedHatDisplay-BlackItalic.ttf in Resources */,
@@ -370,6 +383,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -433,6 +447,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -504,7 +519,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.molfar.event-explorer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -533,7 +548,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.molfar.event-explorer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

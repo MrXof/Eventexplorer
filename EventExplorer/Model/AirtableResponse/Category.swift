@@ -42,21 +42,21 @@ enum Category: String, Equatable, Decodable {
   var name: String {
     switch self {
     case .allActivities:
-      return "All activities"
+      return NSLocalizedString("category.label.all_activities", comment: "")
     case .education:
-      return "Education"
+      return NSLocalizedString("catgory.label.education", comment: "")
     case .culture:
-      return "Culture"
+      return NSLocalizedString("category.label.culture", comment: "")
     case .entertainment:
-      return "Entertainment"
+      return NSLocalizedString("category.label.entertainment", comment: "")
     case .sport:
-      return "Sport"
+      return NSLocalizedString("category.label.sport", comment: "")
     case .shopping:
-      return "Shopping"
+      return NSLocalizedString("category.label.shopping", comment: "")
     case .foodAndDrink:
-      return "Food & Drink"
+      return NSLocalizedString("category.label.food_and_drink", comment: "")
     case .healthAndWellness:
-      return "Health & Wellness"
+      return NSLocalizedString("category.label.health_and_wellness", comment: "")
     }
   }
   

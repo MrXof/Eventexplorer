@@ -46,9 +46,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   let module = MapModule()
   var canUpdateMapCenter: Bool = true
   var countActivities = Int()
-  var arrayPoints: [PinAnnotation] = []
   var previousRegion: MKCoordinateRegion?
-  
+  var arrayPoints: [PinAnnotation] = []
   var trayOriginalCenter: CGPoint!
   var trayDownOffset: CGFloat!
   var trayUp: CGPoint!
@@ -69,6 +68,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     trayDownOffset = 160
     trayUp = popUpView.center
     trayDown = CGPoint(x: popUpView.center.x ,y: popUpView.center.y + trayDownOffset)
+    settingFont()
   }
   //MARK: setting Header View and PopUp View
   func createCornerRadius() {
@@ -112,13 +112,10 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   func configureLocationButton() {
-    let nameButton = "Dnipro"
     let attributs : [NSAttributedString.Key: Any] = [
       .font: UIFont(name: "RedHatDisplay-Bold", size: 29)!,
       .foregroundColor: UIColor.black
     ]
-    let attributedString = NSAttributedString(string: nameButton, attributes: attributs)
-    locationButton.setAttributedTitle(attributedString, for: .normal)
     locationButton.configuration = locationButton.configuration ?? .plain()
     locationButton.configuration?.contentInsets.leading = 0
   }
@@ -174,10 +171,9 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       print(array)
       self.addPointsToMap(array)
       self.countActivities = array.count
-      self.countPeople.text = "\(self.countActivities) activities in the city"
+      self.countPeople.text = String(format: "%d %@", self.countActivities, NSLocalizedString("header_view.label.count_people", comment: ""))
       print(self.module.isLoading)
     }.store(in: &cancellables)
-    
     module.$isLoading.sink { status in
       self.setLoaderStatus(status)
     }.store(in: &cancellables)
@@ -195,12 +191,14 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   func addPointsToMap(_ points: [AirtableRecord<Pin>]) {
     let oldAnnotation = self.mapView.annotations
     mapView.removeAnnotations(oldAnnotation)
-    
-    let points = generateAnnotations(from: points)
-    mapView.addAnnotations(points)
+
+    let newPoints = generateAnnotations(from: points)
+    mapView.addAnnotations(newPoints)
+    arrayPoints = newPoints
   }
   
   func generateAnnotations(from points: [AirtableRecord<Pin>]) -> [PinAnnotation] {
+    var arrayPoints: [PinAnnotation] = []
     guard !points.isEmpty else {
       return arrayPoints
     }
@@ -310,6 +308,12 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
       activityIndicator.stopAnimating()
       loaderView.isHidden = true
     }
+  }
+  
+  func settingFont() {
+    let attributs: [NSAttributedString.Key: Any] = [.font: UIFont(name: "RedHatDisplay-Bold", size: 29)]
+    let attributedString = NSAttributedString(string: "Dnipro", attributes: attributs)
+    locationButton.setAttributedTitle(attributedString, for: .normal)
   }
   
 }
