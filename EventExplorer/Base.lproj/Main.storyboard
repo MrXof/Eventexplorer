@@ -36,7 +36,7 @@
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-f0-ges">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="193.33333333333334"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBd-Ho-sCi">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="193.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="193"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -765,11 +765,6 @@
                             <constraint firstItem="647-jH-Yil" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sPI-hU-qKA"/>
                             <constraint firstItem="zza-aF-RyO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vl5-dt-8dk"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="AkG-IG-H8f"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="gqZ-l2-77G" id="Pph-hO-5SA"/>

@@ -1,0 +1,10 @@
+/*
+  Localizable(Ukrainian).strings
+  EventExplorer
+
+  Created by Даниил Чугуевский on 09.05.2024.
+  
+*/
+
+"header_view.label.location_city" = "Дніпро";
+
