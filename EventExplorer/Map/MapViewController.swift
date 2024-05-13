@@ -311,11 +311,14 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   func settingFont() {
-    let attributs: [NSAttributedString.Key: Any] = [.font: UIFont(name: "RedHatDisplay-Bold", size: 29)]
+    let attributs: [NSAttributedString.Key: Any] = [
+      .font: UIFont(name: "RedHatDisplay-Bold", size: 29) ?? UIFont.systemFont(ofSize: 29),
+      .foregroundColor: UIColor(red: 29/255, green: 34/255, blue: 41/255, alpha: 1.0)
+    ]
     let attributedString = NSAttributedString(string: "Dnipro", attributes: attributs)
     locationButton.setAttributedTitle(attributedString, for: .normal)
   }
-  
+
 }
 
 //MARK: - Extension
