@@ -72,18 +72,11 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   //MARK: setting Header View and PopUp View
   func createCornerRadius() {
-    headerView.layer.cornerRadius = 21
-    headerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
-    blurHeaderView.layer.cornerRadius = 21
-    blurHeaderView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner ]
-    blurHeaderView.clipsToBounds = true
-    
-    //popUpView
-    popUpView.layer.cornerRadius = 21
-    popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    blurPopUpView.layer.cornerRadius = 21
-    blurPopUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    blurPopUpView.clipsToBounds = true
+    headerView.applyCornerRadius(radius: 21, clipsToBounds: false, maskedCorners: .downCorners)
+    blurHeaderView.applyCornerRadius(radius: 21, maskedCorners: .downCorners)
+    //popUp
+    popUpView.applyCornerRadius(radius: 21, clipsToBounds: false, maskedCorners: .topCorners)
+    blurPopUpView.applyCornerRadius(radius: 21, maskedCorners: .topCorners)
   }
   
   func createShadowView(
